@@ -55,7 +55,7 @@ try {
           <div class="flex items-center space-x-3 max-w-full grow ml-3">
             <img class="w-16 h-16 rounded-full shadow-lg" src="https://placehold.co/300x300/000000/FFFFFF.webp?text=<?= mb_strtoupper(mb_substr($data->nama_lengkap, 0, 1, "UTF-8")) ?>" alt="<?= $data->nama_lengkap; ?>">
             <div class="min-w-0 py-5 pl-2">
-              <a href="siswa/siswa.php?n=<?= strtolower(urlencode($data->nis)) ?>" class="text-slate-900 font-medium cursor-pointer hover:underline hover:underline-offset-2 text-sm sm:text-lg truncate dark:text-slate-200"><?= $data->nama_lengkap ?></a>
+              <a href="siswa/siswa.php?n=<?= strtolower(urlencode($data->nis)) ?>" class="text-slate-900 font-medium cursor-pointer hover:underline hover:underline-offset-2 text-sm sm:text-lg truncate dark:text-slate-200"><?= str_replace('.', ' ', ucfirst($data->nama_lengkap)) ?></a>
               <div class="text-slate-500 font-medium text-sm sm:text-base leading-tight truncate dark:text-slate-400"><?= $data->jurusan ?></div>
             </div>
           </div>
