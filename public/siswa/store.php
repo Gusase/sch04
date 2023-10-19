@@ -43,7 +43,7 @@ require_once __DIR__ . '/../../config/database.php';
 //   exit;
 // }
 require_once __DIR__ . '/../../utils/Helper.php';
-Helper::generate(50);
+Helper::generate(25);
 die;
 
 $connection = connect();

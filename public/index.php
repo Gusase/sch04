@@ -105,6 +105,8 @@ $page = redirect($v);
       </div>
     <?php endif; ?>
 
+    <?php include_once $page['page'] ?>
+
     <!-- error -->
     <div class="space-y-4 absolute top-20 z-30 right-5">
       <?php if (!empty($info)) : ?>
@@ -145,9 +147,7 @@ $page = redirect($v);
       <?php endif; ?>
     </div>
     <!-- error -->
-
-  <?php include_once $page['page'];
-  endif ?>
+  <?php endif; ?>
 
   <!-- <script src="client/js/flowbite.min.js"></script> -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.1/flowbite.min.js"></script>

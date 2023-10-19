@@ -19,7 +19,7 @@ try {
 
   $connection->close();
 } catch (\Throwable $e) {
-  $error = $e->getMessage();
+  $errors = $e->getMessage();
 }
 
 ?>
