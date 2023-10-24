@@ -6,20 +6,20 @@
  * @param string Url yg mau di ambil
  * @return array array assosiatif
  */
-function redirect(string $url): array
+function redirect($url)
 {
 
   if ($url == 'siswa') {
     if (isset($_GET['m']) && $_GET['m'] == 'edit') {
       return [
         't' => 'Edit',
-        'head' => 'Mari Ubah Beberapa Hal',
+        'head' => '( ´･･)ﾉ(._.`)',
         'page' => 'component/siswa/formEdit.php'
       ];
     }
     return [
       't' => 'Semua siswa',
-      'head' => 'Prepare for chaos my rule begins',
+      'head' => '( •_•)>⌐■-■',
       'page' => 'siswa/index.php'
     ];
   } elseif ($url == 'mapel') {
@@ -32,7 +32,7 @@ function redirect(string $url): array
     }
     return [
       't' => 'Semua mapel',
-      'head' => 'Your fate is sealed, I control destiny',
+      'head' => '(^///^)',
       'page' => 'mapel/index.php'
     ];
   } elseif ($url == 'nilai') {
@@ -45,13 +45,39 @@ function redirect(string $url): array
     }
     return [
       't' => 'Semua Nilai',
-      'head' => '😎🥵',
+      'head' => '(⊙_⊙;)',
       'page' => 'nilai/index.php'
+    ];
+  } elseif ($url == 'guru') {
+    if (isset($_GET['m']) && $_GET['m'] == 'edit') {
+      return [
+        't' => 'Edit',
+        'head' => 'Edit guru',
+        'page' => 'component/guru/formEdit.php'
+      ];
+    }
+    return [
+      't' => 'Semua guru',
+      'head' => '(╯°□°）╯︵ ┻━┻',
+      'page' => 'guru/index.php'
+    ];
+  } elseif ($url == 'kelas') {
+    if (isset($_GET['m']) && $_GET['m'] == 'edit') {
+      return [
+        't' => 'Edit',
+        'head' => 'Edit kelas',
+        'page' => 'component/kelas/formEdit.php'
+      ];
+    }
+    return [
+      't' => 'Semua kelas',
+      'head' => '╯︵ ┻━┻',
+      'page' => 'kelas/index.php'
     ];
   } else {
     return [
       't' => 'Overview',
-      'head' => 'Your feeble resistance amuses me',
+      'head' => '(*/ω＼*)',
       'page' => 'home.php'
     ];
   }

@@ -26,6 +26,23 @@ class Helper
     }
   }
 
+  public static function generateGuru(int $count)
+  {
+    for ($i = 0; $i < $count; $i++) {
+      $user = Faker\Factory::create('ja_JP');
+      $datas = (object)[
+        'kode_guru' => $i,
+        'nama_guru' => $user->userName(),
+        'pendidikan' => $user->companySuffix(),
+        'prodi' => $user->text(20)
+      ];
+      $connection = connect();
+      $query = "INSERT INTO gurus (kode_guru, nama_guru, pendidikan, prodi) 
+  VALUES ('$datas->kode_guru', '$datas->nama_guru', '$datas->pendidikan', '$datas->prodi')";
+      $datas = $connection->query($query);
+    }
+  }
+
   public static function getMapels(string $table): mysqli_result
   {
     $query = "SELECT * from $table";

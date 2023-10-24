@@ -18,7 +18,6 @@ if (isset($_SESSION['info'])) {
 // page
 $v = isset($_GET['v']) ? $_GET['v'] : '';
 $page = redirect($v);
-
 // if (isset($_POST['go'])) {
 //   $nama = trim($_POST['nama']);
 //   $kelas = trim($_POST['kelas']);
@@ -82,29 +81,6 @@ $page = redirect($v);
 
     </section>
 
-
-    <?php
-    $url = isset($_GET['v']) ? $_GET['v'] : null;
-    if ($url) : ?>
-      <div id="authentication-modal" tabindex="-1" aria-hidden="true" class="hidden fixed bg-black/10 backdrop-blur-sm top-0 left-0 right-0 z-50 w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] min-h-screen duration-200 justify-center items-center flex">
-        <?php
-        switch ($_GET['v']) {
-          case 'siswa':
-            include_once 'component/siswa/form.php';
-            break;
-          case 'mapel';
-            include_once 'component/mapel/form.php';
-            break;
-          case 'nilai';
-            include_once 'component/nilai/form.php';
-            break;
-          default:
-            break;
-        }
-        ?>
-      </div>
-    <?php endif; ?>
-
     <!-- error -->
     <div class="space-y-4 absolute top-20 z-30 right-5">
       <?php if (!empty($info)) : ?>
@@ -146,8 +122,27 @@ $page = redirect($v);
     </div>
     <!-- error -->
 
-  <?php include_once $page['page'];
-  endif ?>
+    <?php
+    $url = isset($_GET['v']) ? $_GET['v'] : false;
+
+    include_once $page['page'];
+
+    if ($url) : ?>
+      <div id="authentication-modal" tabindex="-1" aria-hidden="true" class="hidden fixed bg-black/10 backdrop-blur-sm top-0 left-0 right-0 z-50 w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] min-h-screen duration-200 justify-center items-center flex">
+        <?php
+        $pagg = match ($_GET['v']) {
+          'siswa' => 'component/siswa/form.php',
+          'mapel' => 'component/mapel/form.php',
+          'nilai' => 'component/nilai/form.php',
+          'guru' => 'component/guru/form.php',
+          'kelas' => 'component/kelas/form.php',
+        };
+
+        include_once $pagg
+        ?>
+      </div>
+    <?php endif; ?>
+  <?php endif ?>
 
   <!-- <script src="client/js/flowbite.min.js"></script> -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.1/flowbite.min.js"></script>
