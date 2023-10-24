@@ -3,7 +3,6 @@ require_once __DIR__ . '/../../utils/Helper.php';
 
 try {
   $connection = connect();
-  $query = '';
 
   if ($connection->connect_errno) {
     throw new Exception(
@@ -14,16 +13,18 @@ try {
     $nis = $_POST['inSiswa'];
     $mpl = $_POST['inMapel'];
 
-    $qr = "SELECT * FROM nilai WHERE nis_siswa = '$nis'";
+    $qr = "SELECT * FROM nilai WHERE nis_siswa = '$nis' AND kd_mapel = '$mpl'";
 
     $row = $connection->query($qr);
 
     if ($row->num_rows > 0) {
-      throw new Exception("Error statement");
+      // Data sudah ada, jadi throw pengecualian
+      throw new Exception("nis_siswa = '$nis' dan kd_mapel = '$mpl' sudah ada.");
+    } else {
+      // Data belum ada, jadi kita dapat melanjutkan dengan INSERT
+      $query = "INSERT INTO nilai(kd_mapel, nis_siswa) VALUES ('$mpl', '$nis')";
+      $datas = $connection->query($query);
     }
-
-    $query = "INSERT INTO nilai(kd_mapel,nis_siswa) VALUES ('$mpl','$nis')";
-    $datas = $connection->query($query);
   }
 
   $query = "SELECT * from siswas
@@ -31,21 +32,16 @@ try {
             JOIN mapel ON mapel.kode_mapel = nilai.kd_mapel";
 
   if (isset($_POST['go']) && $_POST['mapel'] != 'x') {
-    $query = 'SELECT * FROM siswas
-              JOIN nilai ON nilai.nis_siswa = siswas.nis
-              JOIN mapel ON mapel.kode_mapel = nilai.kd_mapel
-              WHERE nilai.kd_mapel =' . $_POST['mapel'] . '';
     $selected = $_POST['mapel'];
+    $query .= " WHERE nilai.kd_mapel = '$selected'";
   } else {
-    $query = "SELECT * FROM siswas
-              JOIN nilai ON nilai.nis_siswa = siswas.nis
-              JOIN mapel ON mapel.kode_mapel = nilai.kd_mapel
-              ORDER BY siswas.nama_lengkap asc";
+    $query .= " ORDER BY siswas.nama_lengkap ASC";
   }
+
   var_dump($query);
   // die;
   $datas = $connection->query($query);
-  // $byk = mysqli_num_rows($datas);
+  $byk = (mysqli_num_rows($datas) > 0) ? 'Menampilkan ' . mysqli_num_rows($datas) . ' nilai' : 'Tidak ada data';
 
   if (!$datas) {
     throw new Exception("Error to get data");
@@ -54,10 +50,10 @@ try {
   // if (!$connection->affected_rows > 0) {
   //   throw new Exception("Error Processing Request");
   // }
-
+  
   $connection->close();
-} catch (\Throwable $e) {
-  $error = $e->getMessage();
+} catch (\Exception $e) {
+  $errors[] = $e->getMessage();
 }
 
 ?>
@@ -67,9 +63,7 @@ try {
   <div class="flex-row items-center justify-between p-4 space-y-3 rounded-ss-lg dark:bg-gray-800 sm:flex sm:space-y-0 sm:space-x-4 sticky top-20 shadow-2xl w-full">
     <div>
       <h4 class="mr-3 text-2xl font-semibold dark:text-white">Semua data</h4>
-      <p class="mt-1 text-sm font-normal text-gray-500 dark:text-gray-400"><?php
-                                                                            $byk = mysqli_num_rows($datas);
-                                                                            echo ($byk > 0) ? "Menampilkan $byk data" : 'Tidak ada data'; ?></p>
+      <p class="mt-1 text-sm font-normal text-gray-500 dark:text-gray-400"><?= $byk ?? "Silahkan <span class=\"underline hover:no-underline cursor-pointer\" onclick=\"window.location.href = 'https://ev.crud.test/?v=nilai'\">Refresh</span>" ?></p>
     </div>
     <div class="flex items-center justify-between pb-4">
 
@@ -94,7 +88,7 @@ try {
 
     <!-- Dropdown filter siswa maoel -->
     <div id="dropAdvance" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-72 dark:bg-gray-700 dark:divide-gray-600">
-      <form action="http://ev.final.eva/?v=nilai" method="post">
+      <form action="https://ev.crud.test/?v=nilai" method="post">
         <ul class="p-3 space-y-3 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownToggleButton">
           <li>
             <label for="siswa" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Pilih siswa</label>
@@ -144,7 +138,7 @@ try {
 
     <!-- dropdown filter -->
     <div id="dropFilter" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-72 dark:bg-gray-700 dark:divide-gray-600">
-      <form action="http://ev.final.eva/?v=nilai" method="post">
+      <form action="https://ev.crud.test/?v=nilai" method="post">
         <ul class="p-3 space-y-1 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownToggleButton">
           <li>
             <label for="mapel" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Pilih mapel</label>
