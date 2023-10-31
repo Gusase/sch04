@@ -51,8 +51,6 @@ if ($datas->num_rows > 0) {
 }
 
 $query = "INSERT INTO kelas (id, nama, kapasitas,kode_guru) VALUES ('$id', '$nama','$kapasitas', '$id_guru')";
-var_dump($query);
-die;
 $datas = $connection->query($query);
 
 if (!$datas) {

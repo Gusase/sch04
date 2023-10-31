@@ -81,6 +81,13 @@ $page = redirect($v);
 
     </section>
 
+    <?php
+    $url = isset($_GET['v']) ? $_GET['v'] : false;
+
+    include_once $page['page'];
+
+    ?>
+
     <!-- error -->
     <div class="space-y-4 absolute top-20 z-30 right-5">
       <?php if (!empty($info)) : ?>
@@ -122,11 +129,11 @@ $page = redirect($v);
     </div>
     <!-- error -->
 
+
     <?php
-    $url = isset($_GET['v']) ? $_GET['v'] : false;
-
-    include_once $page['page'];
-
+    /**
+     * Modal box 
+     */
     if ($url) : ?>
       <div id="authentication-modal" tabindex="-1" aria-hidden="true" class="hidden fixed bg-black/10 backdrop-blur-sm top-0 left-0 right-0 z-50 w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] min-h-screen duration-200 justify-center items-center flex">
         <?php

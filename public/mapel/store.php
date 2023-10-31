@@ -9,7 +9,7 @@ $errors = [];
 if (!isset($_POST['kode'])) {
   $errors[] = 'Anda tidak memberi nilai apapun';
   $_SESSION['errors'] = $errors;
-  header('Location: http://ev.final.eva/?v=mapel');
+  header('Location: http://ev.final.test/?v=mapel');
   exit;
 }
 
@@ -37,18 +37,18 @@ if (!is_numeric($kode)) {
 }
 if (count($errors) > 0) {
   $_SESSION['errors'] = $errors;
-  header('Location: http://ev.final.eva/?v=mapel');
+  header('Location: http://ev.final.test/?v=mapel');
   exit;
 }
 $connection = connect();
 
-$queryAvaible = "SELECT * FROM mapel WHERE nama_mapel LIKE '%$nama%'";
+$queryAvaible = "SELECT * FROM mapel WHERE nama_mapel LIKE '%$nama%' OR kode_mapel LIKE '%$kode%'";
 $datas = $connection->query($queryAvaible);
 
 if ($datas->num_rows > 0) {
   $errors[] = 'Nama mapel "' . $nama . '" sudah ada';
   $_SESSION['errors'] = $errors;
-  header('Location: http://ev.final.eva/?v=mapel');
+  header('Location: http://ev.final.test/?v=mapel');
   exit;
 }
 
@@ -61,5 +61,5 @@ if (!$datas) {
 }
 
 $_SESSION['info'] = "Mapel {$nama} berhasil ditambahkan";
-header('Location: http://ev.final.eva/?v=mapel');
+header('Location: http://ev.final.test/?v=mapel');
 exit;

@@ -6,17 +6,17 @@ if (isset($_POST['k'])) {
   $connection = connect();
 
   $id = $_POST['k'];
-  $query = "DELETE FROM mapel WHERE mapel.kode_mapel = '$id'";
-  
+  $query = "DELETE FROM kelas WHERE kelas.id = '$id'";
+
   $datas = mysqli_query($connection, $query);
-  
+
   if (!$datas) {
-    $_SESSION['info'] = "Mapel gagal dihapus";
-    header('Location: http://ev.final.eva/?v=mapel');
+    $_SESSION['info'] = "kelas gagal dihapus";
+    header('Location: http://ev.final.test/?v=kelas');
     exit;
   }
 
-  $_SESSION['info'] = "Mapel berhasil dihapus";
-  header('Location: http://ev.final.eva/?v=mapel');
+  $_SESSION['info'] = "kelas berhasil dihapus";
+  header('Location: http://ev.final.test/?v=kelas');
   exit;
 }

@@ -74,6 +74,19 @@ function redirect($url)
       'head' => '╯︵ ┻━┻',
       'page' => 'kelas/index.php'
     ];
+  } elseif ($url == 'raport') {
+    if (isset($_GET['m']) && $_GET['m'] == 'edit') {
+      return [
+        't' => 'Edit',
+        'head' => 'Edit nilai',
+        'page' => 'component/nilai/formEdit.php'
+      ];
+    }
+    return [
+      't' => 'Raport',
+      'head' => '( ˘︹˘ )',
+      'page' => 'raport/index.php'
+    ];
   } else {
     return [
       't' => 'Overview',
