@@ -9,6 +9,7 @@ try {
       "Error to connect :" . $connection->connect_error
     );
   }
+
   if (isset($_POST['inMapel']) && isset($_POST['goAdv'])) {
     $nis = $_POST['inSiswa'];
     $mpl = $_POST['inMapel'];
@@ -18,11 +19,11 @@ try {
     $row = $connection->query($qr);
 
     if ($row->num_rows > 0) {
-      // Data sudah ada, jadi throw pengecualian
       throw new Exception("nis_siswa = '$nis' dan kd_mapel = '$mpl' sudah ada.");
     } else {
-      // Data belum ada, jadi kita dapat melanjutkan dengan INSERT
       $query = "INSERT INTO nilai(kd_mapel, nis_siswa) VALUES ('$mpl', '$nis')";
+      // var_dump($query);
+      // die;
       $datas = $connection->query($query);
     }
   }
@@ -241,7 +242,7 @@ try {
                 <?= $data->grade ?? '-'; ?>
               </td>
               <td class="px-6 py-4 text-right inline-flex">
-                <a href="?v=nilai&i=<?= $data->kd_mapel; ?>&m=edit" class="text-white capitalize bg-[#404eed] hover:bg-blue-800/95 focus:ring-2 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center mr-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                <a href="?v=nilai&i=<?= $data->nis_siswa; ?>&m=edit" class="text-white capitalize bg-[#404eed] hover:bg-blue-800/95 focus:ring-2 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center mr-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                   <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5 mr-2 -ml-1" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                     <path d="M8 9a3 3 0 100-6 3 3 0 000 6zM8 11a6 6 0 016 6H2a6 6 0 016-6zM16 7a1 1 0 10-2 0v1h-1a1 1 0 100 2h1v1a1 1 0 102 0v-1h1a1 1 0 100-2h-1V7z"></path>
                   </svg>

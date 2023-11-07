@@ -1,4 +1,13 @@
 <?php
+require_once __DIR__ . '/../../config/database.php';
+
+if (!isset($_POST['nis'])) {
+  header('Location: http://ev.final.test/?v=nilai');
+  exit;
+}
+
+$connect = connect();
+
 $nis = $_POST['nis'];
 $kelas = $_POST['kelas'];
 
@@ -22,26 +31,25 @@ if ($nilaiAkhir >= 90) {
   $result = 'F';
 };
 
-require 'config/connect.php';
 
-$query = "UPDATE nilai SET kelas = '$kelas', kehadiran = '$resHadir', tugas = '$resTugas', formatif = '$resFormatif' , uts = '$resUts', uas = '$resUas', nilai_akhir = '$nilaiAkhir', grade = '$result' WHERE nilai.kd_nilai = '$nis'";
+$query = "UPDATE nilai n SET kelas = '$kelas', kehadiran = '$resHadir', tugas = '$resTugas', formatif = '$resFormatif' , uts = '$resUts', uas = '$resUas', nilai_akhir = '$nilaiAkhir', grade = '$result' WHERE n.nis_siswa = '$nis'";
 
-var_dump($query);
-die;
-// $con = new Database;
-// $con->connect();
 $datas = mysqli_query($connect, $query);
 
 if ($datas) {
   echo "
-         <script>
-             alert('Data {$nama} berhasil ditambahkan!');
-         </script>
-     ";
+        <script>
+            alert('Data {$nama} berhasil ditambahkan!');
+        </script>
+      ";
+  header('Location: http://ev.final.test/?v=nilai');
+  exit;
 } else {
   echo "
-         <script>
-             alert('Data {$nama} gagal ditambahkan!');
-         </script>
-     ";
+        <script>
+            alert('Data {$nama} gagal ditambahkan!');
+        </script>
+      ";
+  header('Location: http://ev.final.test/?v=nilai');
+  exit;
 }

@@ -30,6 +30,9 @@
         <li>
           <a href="http://ev.final.test/?v=nilai" class="block py-2 pl-3 pr-4 text-gray-900 bg-gray-100 hover:underline hover:underline-offset-2 rounded md:bg-transparent dark:hover:decoration-sky-600 hover:text-blue-700 md:p-0 dark:text-white">Nilai</a>
         </li>
+        <li>
+          <a href="http://ev.final.test/?v=raport" class="block py-2 pl-3 pr-4 text-gray-900 bg-gray-100 hover:underline hover:underline-offset-2 rounded md:bg-transparent dark:hover:decoration-sky-600 hover:text-blue-700 md:p-0 dark:text-white">Raport</a>
+        </li>
         <?php
         if ($_REQUEST) : ?>
           <li>
