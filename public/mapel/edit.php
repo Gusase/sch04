@@ -30,7 +30,7 @@ if (!is_numeric($kode)) {
 }
 if (count($errors) > 0) {
   $_SESSION['errors'] = $errors;
-  header('Location: http://ev.final.eva/?v=mapel');
+  header('Location: http://ev.final.test/?v=mapel');
   exit;
 }
 $connection = connect();
@@ -45,10 +45,10 @@ if (!$datas) {
 
 if (!$connection->affected_rows > 0) {
   $_SESSION['info'] = "Data mapel {$nama} tidak ada yg diubah";
-  header('Location: http://ev.final.eva/?v=mapel');
+  header('Location: http://ev.final.test/?v=mapel');
   exit;
 }
 
 $_SESSION['info'] = "Mapel {$nama} berhasil diubah";
-header('Location: http://ev.final.eva/?v=mapel');
+header('Location: http://ev.final.test/?v=mapel');
 exit;

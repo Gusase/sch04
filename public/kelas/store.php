@@ -1,6 +1,11 @@
 <?php
 session_start();
 require_once __DIR__ .  '/../../config/database.php';
+// require_once __DIR__ . '/../../vendor/autoload.php';
+
+// require_once __DIR__ . '/../../utils/Helper.php';
+// Helper::generateKelas(25);
+// die;
 
 $i = 0;
 $e = ['id', 'nama', 'kapasitas', 'guru'];

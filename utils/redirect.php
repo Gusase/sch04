@@ -75,12 +75,16 @@ function redirect($url)
       'page' => 'kelas/index.php'
     ];
   } elseif ($url == 'raport') {
-    if (isset($_GET['m']) && $_GET['m'] == 'edit') {
-      return [
-        't' => 'Edit',
-        'head' => 'Edit nilai',
-        'page' => 'component/nilai/formEdit.php'
-      ];
+    if (isset($_GET['m']) && $_GET['m'] == 'print') {
+      $id = $_GET['i'];
+      // return [
+      //   't' => 'Raport',
+      //   'head' => 'rport',
+      //   'page' => 'component/raport/print.php'
+      // ];
+      $url = "/component/raport/print.php?i=$id";
+      $url = str_replace(PHP_EOL, '', $url);
+      return header("Location: $url");
     }
     return [
       't' => 'Raport',

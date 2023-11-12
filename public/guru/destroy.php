@@ -12,12 +12,12 @@ if (isset($_POST['nama'])) {
   // $datas = mysqli_query($connect, $query);
 
   if (!$datas) {
-    $_SESSION['info'] = "Siswa masih disini";
+    $_SESSION['info'] = "Guru masih disini";
     header('Location: http://ev.final.test/?v=guru');
     exit;
   }
 
-  $_SESSION['info'] = "Siswa adios";
+  $_SESSION['info'] = "Guru adios";
   header('Location: http://ev.final.test/?v=guru');
   exit;
 }

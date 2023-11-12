@@ -12,17 +12,12 @@ $tel = htmlspecialchars($_POST['nomor']);
 $jurusan = htmlspecialchars($_POST['jurusan']);
 $agama = htmlspecialchars($_POST['agama']);
 
-
-// $jamakhir = htmlspecialchars($_POST['jam-akhir']);
-
-// $jam = $jamawal . '-' . $jamakhir;
-
 $i = 0;
-$e = array('nis', 'nama', 'jam');
-$errors = array();
+$e = ['nis', 'nama', 'tanggal lahir','no telepon','jenis kelamin','alamat','jurusan','agama'];
+$errors = [];
 
 foreach ($_POST as $field) {
-  if (empty($field)) {
+  if (empty(trim($field)) || $field == '-1') {
     $errors[] = $e[$i] . ' harus diisi!';
   }
   $i++;
@@ -38,7 +33,7 @@ if (!is_numeric($nis)) {
 }
 if (count($errors) > 0) {
   $_SESSION['errors'] = $errors;
-  header('Location: http://ev.final.eva/?v=siswa');
+  header('Location: http://ev.final.test/?v=siswa');
   exit;
 }
 $connection = connect();
@@ -46,6 +41,7 @@ $connection = connect();
 $query = "UPDATE siswas SET nis='$nis', nama_lengkap='$nama', tgl_lahir='$tanggal', jk='$jk', alamat='$alamat', telp='$tel', agama='$agama', jurusan='$jurusan' WHERE siswas.nis='$kode'";
 
 $datas = $connection->query($query);
+$nama = str_replace('.', ' ', ucfirst($nama));
 
 if (!$datas) {
   die('Unkwon error: ' . $connection->connect_error);
@@ -53,10 +49,10 @@ if (!$datas) {
 
 if (!$connection->affected_rows > 0) {
   $_SESSION['info'] = "Data <span class='normal-case'>{$nama}</span> tidak ada yg diubah";
-  header('Location: http://ev.final.eva/?v=siswa');
+  header('Location: http://ev.final.test/?v=siswa');
   exit;
 }
 
 $_SESSION['info'] = "<span class='normal-case'>{$nama}</span> berhasil diperbarui";
-header('Location: http://ev.final.eva/?v=siswa');
+header('Location: http://ev.final.test/?v=siswa');
 exit;

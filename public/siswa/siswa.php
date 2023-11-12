@@ -4,13 +4,13 @@ session_start();
 require_once '../../config/database.php';
 
 try {
-  if (!isset($_GET['n']) && empty($_GET['n'])) {
+  if (!isset($_GET['id']) && empty($_GET['id'])) {
     $_SESSION['error'] = 'Maaf data yg diberikan kurang';
     header('Location: ../');
     exit;
   }
 
-  $cd = $_GET['n'];
+  $cd = $_GET['id'];
 
   $connection = connect();
   if (!$connection) {
@@ -50,7 +50,7 @@ try {
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script src="https://cdn.tailwindcss.com"></script>
   <!-- <link href="../client/css/style.css" rel="stylesheet"> -->
-  <title><?= $data->nama_lengkap . ' / ' . $data->jurusan ?></title>
+  <title><?= str_replace('.', ' ', ucfirst($data->nama_lengkap)) . ' / ' . $data->jurusan ?></title>
   <script>
     tailwind.config = {
       darkMode: 'class',
@@ -66,7 +66,7 @@ try {
   <section class="bg-[#404eed] dark:bg-gray-900 isolate relative max-w-full pt-36 pb-40">
     <div class="container min-h-0 uppercase mx-auto">
       <div class="min-h-[80px] text-center max-w-[1480px]">
-        <h1 class="text-4xl sm:text-6xl font-extrabold text-white tracking-tight mt-3"><?= $data->nama_lengkap; ?></h1>
+        <h1 class="text-4xl sm:text-6xl font-extrabold text-white tracking-tight mt-3"><?= str_replace('.', ' ', ucfirst($data->nama_lengkap)) ?></h1>
         <div class="max-w-xl capitalize mx-auto mt-5 sm:mt-7 text-base font-inital text-gray-100">Aplikasi dalam pengembangan dalam rangka pembuatan <span class="font-semibold">CRUD</span> system</div>
       </div>
     </div>
@@ -91,7 +91,7 @@ try {
             <svg class="w-3 h-3 mx-1 text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
               <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4" />
             </svg>
-            <a href="#" class="ml-1 text-sm font-medium text-gray-700 hover:text-blue-600 md:ml-2 dark:text-gray-400 dark:hover:text-white"><?= $data->nama_lengkap; ?></a>
+            <a href="#" class="ml-1 text-sm font-medium text-gray-700 hover:text-blue-600 md:ml-2 dark:text-gray-400 dark:hover:text-white"><?= $data->nama_lengkap ?></a>
           </div>
         </li>
       </ol>
@@ -99,15 +99,15 @@ try {
       <div class="flex-row items-center justify-between p-4 space-y-3 sm:flex sm:space-y-0 sm:space-x-4">
         <div class="flex items-center">
           <div class="w-20 h-20 rounded-full overflow-hidden">
-            <img class="w-full object-cover rounded-full" src="https://placehold.co/300x300/000000/FFFFFF.webp?text=<?= mb_strtoupper(mb_substr($data->nama_lengkap, 0, 1, "UTF-8")) ?>" alt="<?= $data->nama_lengkap; ?>">
+            <img class="w-full object-cover rounded-full" src="https://placehold.co/300x300/000000/FFFFFF.webp?text=<?= mb_strtoupper(mb_substr($data->nama_lengkap, 0, 1, "UTF-8")) ?>" alt="<?= str_replace('.', ' ', ucfirst($data->nama_lengkap)) ?>">
           </div>
           <div class="ml-4">
-            <h2 class="text-lg font-semibold dark:text-gray-100"><?= $data->nama_lengkap; ?></h2>
+            <h2 class="text-lg font-semibold dark:text-gray-100"><?= str_replace('.', ' ', ucfirst($data->nama_lengkap)) ?></h2>
             <p class="text-gray-600 dark:text-gray-300"><?= $data->jurusan; ?></p>
           </div>
         </div>
-        <a href="/?v=siswa&n=<?= strtolower(urlencode($data->nama_lengkap)) ?>&m=edit" class="inline-flex items-center rounded-md bg-white dark:bg-gray-200 hover:bg-gray-100 focus:outline-none focus:ring-gray-200 focus:ring-2 px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-400">
-          <svg class="w-4 h-4 mr-1 text-gray-800" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 18">
+        <a href="/?v=siswa&n=<?= strtolower(urlencode($data->nama_lengkap)) ?>&m=edit" class="inline-flex items-center rounded-md bg-white dark:bg-gray-700 hover:bg-gray-100 focus:outline-none focus:ring-gray-200 focus:ring-2 px-3 py-2 text-sm font-semibold text-gray-900 dark:text-gray-100 dark:ring-gray-800 shadow-sm ring-1 ring-inset ring-gray-400">
+          <svg class="w-4 h-4 mr-1 text-gray-800 dark:text-gray-50" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 18">
             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.109 17H1v-2a4 4 0 0 1 4-4h.87M10 4.5a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Zm7.95 2.55a2 2 0 0 1 0 2.829l-6.364 6.364-3.536.707.707-3.536 6.364-6.364a2 2 0 0 1 2.829 0Z" />
           </svg>
           Edit

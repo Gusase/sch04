@@ -8,7 +8,7 @@ try {
     );
   }
 
-  $query = "SELECT * from mapel";
+  $query = "SELECT * from mapel ORDER BY nama_mapel ASC";
 
   $datas = $connection->query($query);
   $byk = mysqli_num_rows($datas);
@@ -25,11 +25,11 @@ try {
 ?>
 
 
-<section class="container -mt-7 mx-auto bg-white dark:bg-gray-900 mt-14 ">
+<section class="container mx-auto bg-white dark:bg-gray-900 mt-14">
   <div class="flex-row items-center justify-between p-4 space-y-3 rounded-ss-lg dark:bg-gray-800 sm:flex sm:space-y-0 sm:space-x-4">
     <div>
-      <h4 class="mr-3 text-2xl font-semibold dark:text-white">Semua pelajaran</h4>
-      <p class="mt-1 text-sm font-normal text-gray-500 dark:text-gray-400"><?= $byk > 0 ? "Menampilkan $byk data" : 'Tidak ada data'; ?></p>
+      <h4 class="mr-3 text-2xl font-semibold dark:text-white font-heading">Semua pelajaran</h4>
+      <p class="mt-1 text-sm font-normal text-gray-500 dark:text-gray-400 font-subHeading"><?= $byk > 0 ? "Menampilkan $byk data" : 'Tidak ada data'; ?></p>
     </div>
     <button data-modal-target="authentication-modal" id="addsiswa" data-modal-toggle="authentication-modal" class="text-white capitalize bg-[#404eed] hover:bg-blue-800/95 focus:ring-2 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center mr-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
       <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5 mr-2 -ml-1" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
@@ -43,15 +43,15 @@ try {
       <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
         <tr>
           <th scope="col" class="px-6 py-3">
-            nO
+            no
           </th>
-          <th scope="col" class="px-6 py-3">
+          <th scope="col" class="px-6 py-3 w-1/3">
             kode mapel
           </th>
-          <th scope="col" class="px-6 py-3">
+          <th scope="col" class="px-6 py-3 w-1/3">
             nama mapel
           </th>
-          <th scope="col" class="px-6 py-3">
+          <th scope="col" class="px-6 py-3 w-full">
             jam pelajaran
           </th>
           <th scope="col" class="px-6 py-3">
@@ -62,8 +62,8 @@ try {
       <tbody>
         <?php $i = 1;
         while ($data = $datas->fetch_object()) : ?>
-          <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-            <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+          <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-900 dark:hover:text-white">
+            <th scope="row" class="px-6 py-4 text-center font-medium text-gray-900 whitespace-nowrap dark:text-white">
               <?= $i ?>
             </th>
             <td class="px-6 py-4">
@@ -114,9 +114,9 @@ try {
                     <div class="flex items-center p-6 space-x-2 border-t border-gray-200 rounded-b dark:border-gray-600">
                       <form action="mapel/destroy.php" method="post">
                         <input type="hidden" name="k" value="<?= $data->kode_mapel; ?>">
-                        <button data-modal-hide="defaultModal" type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-red-500 dark:hover:bg-red-600 dark:focus:ring-red-800">Ok</button>
+                        <button data-modal-hide="defaultModal-#<?= $data->kode_mapel ?>" type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-red-500 dark:hover:bg-red-600 dark:focus:ring-red-800">Ok</button>
                       </form>
-                      <button data-modal-hide="defaultModal" class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">Batal</button>
+                      <button data-modal-hide="defaultModal-#<?= $data->kode_mapel ?>" class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">Batal</button>
                     </div>
                   </div>
                 </div>

@@ -1,11 +1,11 @@
 <?php
-
-use Faker\Factory;
-
 session_start();
 
 require_once __DIR__ . '/../../vendor/autoload.php';
 require_once __DIR__ . '/../../config/database.php';
+// require_once __DIR__ . '/../../utils/Helper.php';
+// Helper::generateGuru(50);
+// die;
 
 $kode = htmlspecialchars($_POST['kode_guru']);
 $nama = htmlspecialchars($_POST['nama']);
@@ -34,13 +34,9 @@ if (!is_numeric($kode)) {
 
 if (count($errors) > 0) {
   $_SESSION['errors'] = $errors;
-  header('Location: http://ev.final.test/?v=siswa');
+  header('Location: http://ev.final.test/?v=guru');
   exit;
 }
-
-// require_once __DIR__ . '/../../utils/Helper.php';
-// Helper::generateGuru(50);
-// die;
 
 $connection = connect();
 
@@ -52,5 +48,7 @@ $datas = $connection->query($query);
 if (!$datas) {
   'Unkwon error: ' . $connection->connect_error;
 }
-header('Location: http://ev.final.test/?v=siswa');
+
+$_SESSION['info'] = "Guru {$nama} berhasil ditambahkan";
+header('Location: http://ev.final.test/?v=guru');
 exit;

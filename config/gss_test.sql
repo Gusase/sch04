@@ -2,8 +2,8 @@
 -- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost:3316
--- Generation Time: Nov 07, 2023 at 09:06 AM
+-- Host: localhost:3306
+-- Generation Time: Nov 12, 2023 at 10:49 PM
 -- Server version: 8.0.30
 -- PHP Version: 8.1.10
 
@@ -18,8 +18,10 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `gss_test`
+-- Database: `db_crud`
 --
+CREATE DATABASE IF NOT EXISTS `db_crud` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci;
+USE `db_crud`;
 
 -- --------------------------------------------------------
 
@@ -30,7 +32,7 @@ SET time_zone = "+00:00";
 CREATE TABLE `gurus` (
   `kode_guru` int NOT NULL,
   `nama_guru` varchar(50) NOT NULL,
-  `pendidikan` varchar(4) NOT NULL,
+  `pendidikan` varchar(40) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `prodi` varchar(80) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
@@ -39,56 +41,56 @@ CREATE TABLE `gurus` (
 --
 
 INSERT INTO `gurus` (`kode_guru`, `nama_guru`, `pendidikan`, `prodi`) VALUES
-(0, 'hideki.wakamatsu', 'Ltd', 'Aliquid dolor hic.'),
-(1, 'kobayashi.shota', 'Ltd', 'Quis hic temporibus.'),
-(2, 'akira.miyake', 'Ltd', 'Velit dolores harum.'),
-(3, 'taro.fujimoto', 'Ltd', 'Dolor dolore quae.'),
-(4, 'nagisa.yoko', 'Ltd', 'Est accusantium et.'),
-(6, 'mikako70', 'Ltd', 'Quis occaecati.'),
-(7, 'ryosuke.yamamoto', 'Ltd', 'Vero ut rerum.'),
-(8, 'nanami06', 'Ltd', 'Eaque rerum.'),
-(9, 'sasaki.kyosuke', 'Ltd', 'Qui eligendi.'),
-(10, 'gyamamoto', 'Ltd', 'Omnis ea et.'),
-(11, 'momoko.sasada', 'Ltd', 'Unde aut aut labore.'),
-(12, 'qaota', 'Ltd', 'Sed rerum fugit.'),
-(13, 'fkobayashi', 'Ltd', 'Quibusdam ratione.'),
-(14, 'yosuke59', 'Ltd', 'Et iste est.'),
-(15, 'soutaro21', 'Ltd', 'Officiis dolores.'),
-(16, 'nakamura.takuma', 'Ltd', 'Saepe voluptas ex.'),
-(17, 'tanaka.hideki', 'Ltd', 'Non reprehenderit.'),
-(18, 'satomi00', 'Ltd', 'Dicta et autem quae.'),
-(19, 'pkanou', 'Ltd', 'Quam quaerat.'),
-(20, 'rika.ekoda', 'Ltd', 'Autem velit.'),
-(21, 'omurayama', 'Ltd', 'Ratione qui.'),
-(22, 'mikako71', 'Ltd', 'Commodi aspernatur.'),
-(23, 'fujimoto.sayuri', 'Ltd', 'Inventore.'),
-(24, 'ogaki.jun', 'Ltd', 'Ea sed maxime fugit.'),
-(25, 'mikako23', 'Ltd', 'Itaque facere sed.'),
-(26, 'yuki.nishinosono', 'Ltd', 'Voluptatem rerum.'),
-(27, 'naoto.ito', 'Ltd', 'Sit quo sint veniam.'),
-(28, 'nomura.shuhei', 'Ltd', 'Unde quod fugit aut.'),
-(29, 'cyoshida', 'Ltd', 'Ea ratione rerum.'),
-(30, 'yasuhiro83', 'Ltd', 'Vel omnis ipsam et.'),
-(31, 'taichi.saito', 'Ltd', 'Voluptate minus.'),
-(32, 'tsubasa24', 'Ltd', 'Velit minus illum.'),
-(33, 'kazuya21', 'Ltd', 'Reprehenderit.'),
-(34, 'okanou', 'Ltd', 'Atque natus.'),
-(36, 'smatsumoto', 'Ltd', 'Ratione ut odit.'),
-(37, 'sayuri48', 'Ltd', 'Quidem molestias.'),
-(38, 'msuzuki', 'Ltd', 'Illum laborum.'),
-(39, 'yuki53', 'Ltd', 'Quia magni voluptas.'),
-(40, 'rmiyake', 'Ltd', 'Deleniti eos.'),
-(41, 'hiroshi57', 'Ltd', 'Sit error ex nam.'),
-(42, 'miyake.tomoya', 'Ltd', 'Sed qui.'),
-(43, 'kenichi33', 'Ltd', 'Veniam culpa.'),
-(44, 'qsugiyama', 'Ltd', 'Aperiam dolores.'),
-(45, 'tomoya.kato', 'Ltd', 'Odio laboriosam.'),
-(46, 'takuma.sasaki', 'Ltd', 'Magni vel quis.'),
-(47, 'kiriyama.kumiko', 'Ltd', 'Iusto non nam hic.'),
-(48, 'nanami77', 'Ltd', 'Facere minima.'),
-(49, 'nakajima.chiyo', 'Ltd', 'Quia quisquam.'),
-(55211739, 'Ahmad', 'S1', 'saksaaz'),
-(76519300, 'GGGGGg', 'sa', 'sadasds');
+(0, 'hanako.ogaki', 'Magister', 'Ilmu Biologi'),
+(1, 'taro.saito', 'Sarjana Ilmu Biologi', 'Perhotelan'),
+(2, 'yoko51', 'SMA', 'Farmasi'),
+(3, 'idaka.yuta', 'SMA', 'Ilmu Politik'),
+(4, 'kondo.hiroshi', 'Sarjana Kedokteran', 'Ilmu Politik'),
+(5, 'chiyo.takahashi', 'Sarjana Seni Rupa', 'Ilmu Keperawatan'),
+(6, 'naoko90', 'Sarjana Pendidikan Bahasa Inggris', 'Seni Rupa'),
+(7, 'wyamaguchi', 'Sarjana Ekonomi Islam', 'Ilmu Keperawatan'),
+(8, 'zkudo', 'Sarjana Ekonomi Islam', 'Teknik Informatika'),
+(9, 'shota.aoyama', 'Sarjana Ilmu Kimia', 'Hubungan Internasional'),
+(10, 'hideki48', 'SMP', 'Teknik Perminyakan'),
+(11, 'nomura.satomi', 'Sarjana Teknik Mesin', 'Ilmu Ekonomi'),
+(12, 'oyoshida', 'S3', 'Ilmu Sejarah'),
+(13, 'yosuke41', 'Sarjana Ilmu Komunikasi', 'Teknik Elektro'),
+(14, 'suzuki.chiyo', 'Sarjana Farmasi', 'Agribisnis'),
+(15, 'eharada', 'Sarjana Psikologi', 'Filsafat'),
+(16, 'atsushi.suzuki', 'Diploma', 'Ilmu Politik'),
+(17, 'manabu21', 'D2', 'Ilmu Biologi'),
+(18, 'akato', 'Sarjana Ilmu Fisika', 'Teknik Sipil'),
+(19, 'dito', 'D4', 'Filsafat'),
+(20, 'ttanabe', 'Sarjana Ilmu Fisika', 'Ilmu Politik'),
+(21, 'rei92', 'Sarjana Psikologi', 'Ilmu Keperawatan'),
+(22, 'yamaguchi.naoki', 'S2', 'Ilmu Kimia'),
+(23, 'kumiko22', 'SMP', 'Pariwisata'),
+(24, 'soutaro.nakamura', 'Sarjana Hubungan Internasional', 'Ilmu Komputer'),
+(25, 'kazuya.tanaka', 'Sarjana Seni Rupa', 'Ilmu Politik'),
+(26, 'kumiko.ishida', 'SMA', 'Hubungan Internasional'),
+(27, 'idaka.hanako', 'Sarjana Sastra Jepang', 'Farmasi'),
+(28, 'hideki.hamada', 'Magister Administrasi Publik', 'Filsafat'),
+(29, 'pkanou', 'SD', 'Psikologi'),
+(30, 'fujimoto.kenichi', 'Sarjana Ilmu Fisika', 'Ilmu Sejarah'),
+(31, 'kobayashi.soutaro', 'Sarjana Ilmu Komunikasi', 'Ilmu Keperawatan'),
+(32, 'minoru.tanabe', 'Sarjana Pendidikan Bahasa Inggris', 'Teknik Informatika'),
+(33, 'cyamagishi', 'Sarjana Ilmu Komunikasi', 'Hubungan Internasional'),
+(34, 'ishida.kaori', 'D2', 'Perhotelan'),
+(35, 'youichi.uno', 'Sarjana Ilmu Keperawatan', 'Sastra Jepang'),
+(36, 'kmatsumoto', 'Magister Manajemen', 'Sastra Jepang'),
+(37, 'hamada.yoko', 'Sarjana Ekonomi', 'Agribisnis'),
+(38, 'taota', 'Sarjana Ilmu Komputer', 'Ilmu Kimia'),
+(39, 'kyosuke.wakamatsu', 'Sarjana Pendidikan Bahasa Inggris', 'Manajemen'),
+(40, 'ishida.takuma', 'D1', 'Seni Rupa'),
+(41, 'hiroshi.sato', 'Sarjana Psikologi', 'Arsitektur'),
+(42, 'yoshida.yui', 'Sarjana Hukum', 'Ilmu Biologi'),
+(43, 'gmiyazawa', 'Sarjana Hukum', 'Ilmu Biologi'),
+(44, 'rkondo', 'Doktor', 'Seni Rupa'),
+(45, 'harada.atsushi', 'Ahli Madya', 'Seni Rupa'),
+(46, 'matsumoto.rika', 'Magister', 'Hukum'),
+(47, 'yoshida.akira', 'Magister Administrasi Publik', 'Hukum'),
+(48, 'kumiko76', 'Magister Kesehatan Masyarakat', 'Kedokteran'),
+(49, 'jun.koizumi', 'Sarjana Kedokteran', 'Ilmu Kimia');
 
 -- --------------------------------------------------------
 
@@ -108,10 +110,27 @@ CREATE TABLE `kelas` (
 --
 
 INSERT INTO `kelas` (`id`, `nama`, `kapasitas`, `kode_guru`) VALUES
-(25992899, 'RPL 1', 32, 4),
-(34259334, 'RPL 4', 32, 10),
-(50583089, 'RPL 3', 32, 9),
-(73439618, 'RPL 2', 32, 3);
+(89047200, 'TAV 3', 30, NULL),
+(90254266, 'TITL 3', 32, NULL),
+(90671033, 'TAV 2', 33, NULL),
+(91404352, 'RPL 1', 31, NULL),
+(91404553, 'TGB 2', 29, NULL),
+(91638904, 'RPL 2', 30, NULL),
+(91697310, 'OA 3', 31, NULL),
+(91912706, 'TPB 2', 31, NULL),
+(93022510, 'TKJ 2', 29, NULL),
+(93191295, 'OA 1', 32, 0),
+(93199995, 'OA 2', 29, 5),
+(93344760, 'TKJ 1', 29, NULL),
+(93972096, 'TITL 1', 31, NULL),
+(93975010, 'TGB 1', 32, NULL),
+(94474940, 'TPB 1', 32, NULL),
+(94574911, 'TGB 3', 33, NULL),
+(95474959, 'TAV 1', 31, NULL),
+(96089847, 'TKJ 3', 32, 11),
+(96918984, 'RPL 3', 31, NULL),
+(98964721, 'TITL 2', 30, NULL),
+(99762217, 'TPB 3', 30, NULL);
 
 -- --------------------------------------------------------
 
@@ -131,9 +150,40 @@ CREATE TABLE `mapel` (
 --
 
 INSERT INTO `mapel` (`kode_mapel`, `nama_mapel`, `jp`, `kode_guru`) VALUES
-('26043183', ' Bahasa Inggris ', '09:53', NULL),
-('82570772', 'B.Indonesia', '03:03', NULL),
-('93721186', 'Praktek', '12:12', NULL);
+('12005785', 'Pertanian', '01:07', 23),
+('13856379', 'Sosiologi', '11:06', 24),
+('13977395', 'Bahasa Mandarin', '10:08', 19),
+('14137506', 'Fisika', '10:01', 15),
+('16890044', 'Sejarah Indonesia', '12:15', 12),
+('17591785', 'Manajemen Perhotelan', '10:08', 16),
+('19735225', 'Kejuruan TKJ', '06:12', 10),
+('21979117', 'Pemrograman', '06:27', 9),
+('27073763', 'Prakarya dan Kewirausahaan', '04:17', 10),
+('27591041', 'Geografi', '10:05', 9),
+('33042909', 'Pendidikan Agama', '03:13', 3),
+('33145911', 'Kejuruan TAV', '10:16', 11),
+('34963614', 'Bahasa Inggris', '10:15', 18),
+('38572599', 'Pengelasan', '09:06', 1),
+('42720131', 'Biologi', '08:23', 10),
+('43990711', 'Bahasa Jepang', '04:30', 23),
+('44172166', 'Seni Budaya', '03:02', 11),
+('44676407', 'Manajemen Usaha Mikro dan Kecil', '08:14', 22),
+('50045437', 'Bahasa Sunda', '04:21', 21),
+('55711984', 'Akuntansi', '05:25', 23),
+('57127732', 'Otomotif', '09:13', 10),
+('58061943', 'Bahasa Arab', '12:27', 16),
+('60585569', 'Ekonomi', '01:13', 23),
+('63331296', 'Desain Grafis', '12:02', 12),
+('64764328', 'Bisnis dan Kewirausahaan', '06:09', 8),
+('65825421', 'Matematika', '12:15', 16),
+('67426610', 'Pendidikan Jasmani', '09:02', 9),
+('68627791', 'Pemeliharaan Peralatan Komputer', '02:17', 7),
+('83030400', 'Teknik Permesinan', '10:07', 18),
+('83174913', 'Bahasa Indonesia', '07:30', 4),
+('87105235', 'Pendidikan Kewarganegaraan', '01:28', 15),
+('89062016', 'Kimia', '03:08', 2),
+('95734973', 'Kejuruan RPL', '02:05', 23),
+('99471834', 'Pemrograman Web', '08:01', 9);
 
 -- --------------------------------------------------------
 
@@ -160,17 +210,15 @@ CREATE TABLE `nilai` (
 --
 
 INSERT INTO `nilai` (`kd_nilai`, `nis_siswa`, `kelas`, `kd_mapel`, `kehadiran`, `tugas`, `formatif`, `uts`, `uas`, `nilai_akhir`, `grade`) VALUES
-(30, 38799529, NULL, '26043183', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(31, 44270279, NULL, '26043183', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(32, 42916408, NULL, '26043183', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(33, 10510331, '', '26043183', '4', '10', '70', '30', '40', '84', 'B'),
-(34, 14302773, NULL, '82570772', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(35, 14302773, NULL, '93721186', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(36, 42916408, NULL, '93721186', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(37, 48213510, NULL, '26043183', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(38, 53080579, NULL, '26043183', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(39, 48213510, NULL, '82570772', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(40, 17661692, 'RPL 4', '26043183', '36', '10', '70', '30', '40', '116', 'A');
+(44, 72367620, '', '59554704', '5', '100', '100', '100', '100', '405', 'A'),
+(45, 21743310, NULL, '64494784', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(46, 81934007, '', '19660782', '5', '100', '100', '100', '50', '355', 'A'),
+(47, 72367620, '', '78942346', '5', '87', '90', '89', '82', '353', 'A'),
+(48, 81934007, NULL, '59554704', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(49, 72367620, '', '21979117', '0', '32', '22', '19', '12', '15', 'F'),
+(50, 72367620, '', '95734973', '4', '90', '89', '78', '88', '349', 'A'),
+(51, 81934007, NULL, '43990711', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(52, 72367620, '', '99471834', '3', '8', '88', '88', '78', '265', 'A');
 
 -- --------------------------------------------------------
 
@@ -195,56 +243,55 @@ CREATE TABLE `siswas` (
 --
 
 INSERT INTO `siswas` (`nis`, `id_kelas`, `nama_lengkap`, `tgl_lahir`, `jk`, `alamat`, `telp`, `agama`, `jurusan`) VALUES
-(10510331, 25992899, 'momoko91', '1998-12-27', 'l', '7142519  山梨県佐藤市中央区原田町山口8-8-6 コーポ青山102号', '56922093', 'islam', 'Rekayasa Perangkat Lunak'),
-(14302773, 34259334, 'zmurayama', '2007-07-16', 'l', '1552681  京都府小泉市東区村山町田中3-5-2 ハイツ野村105号', '79506565', 'islam', 'otomotif'),
-(17571776, 50583089, 'ekoda.miki', '1984-03-23', 'p', '3356347  鹿児島県大垣市中央区青田町佐々木6-6-7', '15390438', 'kristen', 'Rekayasa Perangkat Lunak'),
-(17629725, 34259334, 'kaori.tanabe', '1986-11-06', 'p', '7144896  佐賀県中津川市西区山口町田辺6-6-1', '39770065', 'islam', 'otomotif'),
-(17661692, 34259334, 'Rei', '2019-09-27', 'p', '9282614  宮城県原田市中央区津田町中島3-7-3 コーポ若松104号', '61459397', 'kristen', 'Rekayasa Perangkat Lunak'),
-(22644505, NULL, 'naoto.kato', '2011-05-08', 'l', '2252695  沖縄県山本市南区高橋町加納2-9-3 コーポ吉本110号', '53877141', 'islam', 'otomotif'),
-(23549415, NULL, 'taro78', '2008-08-01', 'l', '2388031  兵庫県小林市東区野村町中村2-4-1 コーポ宮沢107号', '39613591', 'islam', 'otomotif'),
-(23637693, NULL, 'kazuya31', '1971-05-29', 'l', '6372955  神奈川県青田市北区吉本町大垣3-9-7 コーポ井高105号', '91229913', 'kristen', 'Rekayasa Perangkat Lunak'),
-(27338004, NULL, 'kkijima', '2003-06-13', 'p', '8807365  石川県石田市西区工藤町松本8-3-8', '50966111', 'kristen', 'Rekayasa Perangkat Lunak'),
-(32640410, NULL, 'mikako87', '2004-02-23', 'p', '6354693  三重県松本市西区吉本町三宅10-2-2 ハイツ近藤107号', '31971566', 'kristen', 'Rekayasa Perangkat Lunak'),
-(35487339, NULL, 'aoyama.tsubasa', '2020-09-25', 'l', '8352453  滋賀県小林市南区村山町中津川10-8-3 コーポ渚109号', '33220835', 'islam', 'otomotif'),
-(38270612, NULL, 'sasaki.kenichi', '2010-02-24', 'p', '6366647  栃木県小泉市東区中島町喜嶋6-1-6 ハイツ高橋103号', '42838179', 'kristen', 'otomotif'),
-(38799529, NULL, 'nagisa.mai', '2011-09-01', 'l', '9246212  京都府佐々木市西区斉藤町佐藤7-6-7', '78487019', 'kristen', 'Rekayasa Perangkat Lunak'),
-(40179039, NULL, 'yuta.nakajima', '2014-03-12', 'l', '9444431  福岡県中津川市北区山田町宇野3-6-5 コーポ中村108号', '39752919', 'islam', 'Rekayasa Perangkat Lunak'),
-(41399300, NULL, 'asuka.nishinosono', '1987-12-29', 'p', '2443913  京都府松本市南区吉田町江古田7-3-9 コーポ杉山110号', '45970744', 'kristen', 'Rekayasa Perangkat Lunak'),
-(42916408, NULL, 'asuka99', '1976-06-22', 'p', '6185601  埼玉県斉藤市中央区青田町加藤8-10-1 コーポ小林102号', '42605423', 'islam', 'otomotif'),
-(44270279, NULL, 'aota.rei', '2013-09-27', 'p', '8798380  青森県井高市西区高橋町原田8-3-4', '41554541', 'islam', 'otomotif'),
-(44805442, NULL, 'kaori.kudo', '2019-01-24', 'l', '8538487  東京都大垣市南区津田町田辺2-5-1 ハイツ原田107号', '44036382', 'islam', 'otomotif'),
-(48213510, NULL, 'yoshida.taichi', '1971-10-03', 'l', '2677980  奈良県坂本市東区宮沢町山口8-2-2 ハイツ山岸107号', '35272400', 'islam', 'Rekayasa Perangkat Lunak'),
-(48845734, NULL, 'tsuda.atsushi', '2011-04-06', 'p', '6213852  宮崎県青山市西区青山町原田1-3-9 コーポ青山107号', '54518423', 'kristen', 'Rekayasa Perangkat Lunak'),
-(49885825, NULL, 'tsuda.maaya', '1989-03-07', 'l', '5705247  新潟県田中市南区中津川町浜田2-4-1', '88552679', 'kristen', 'Rekayasa Perangkat Lunak'),
-(50372975, NULL, 'soutaro35', '1998-05-15', 'l', '1222144  鹿児島県井高市西区小泉町中村3-10-7', '16368443', 'islam', 'Rekayasa Perangkat Lunak'),
-(52230617, NULL, 'kimura.naoko', '2003-11-27', 'l', '1541690  大分県小林市東区大垣町中島6-3-2', '64368852', 'kristen', 'Rekayasa Perangkat Lunak'),
-(53080579, NULL, 'xnakatsugawa', '1976-03-13', 'l', '4546001  宮崎県笹田市南区浜田町小泉4-10-4 コーポ加納110号', '48234248', 'islam', 'otomotif'),
-(54701934, NULL, 'jsasaki', '1999-10-26', 'l', '9322215  大阪府渚市中央区大垣町山田9-2-2', '86689484', 'kristen', 'otomotif'),
-(56670917, NULL, 'maaya02', '2016-11-14', 'p', '5323912  三重県中村市中央区宇野町渡辺10-8-5', '90710892', 'kristen', 'otomotif'),
-(57522885, NULL, 'yoko.sakamoto', '1994-01-06', 'l', '2199580  香川県廣川市南区中島町原田1-3-4 コーポ山田103号', '47826941', 'kristen', 'otomotif'),
-(58716108, NULL, 'hirokawa.ryohei', '2017-05-03', 'l', '4288664  北海道近藤市東区木村町小林6-9-2', '86215072', 'kristen', 'Rekayasa Perangkat Lunak'),
-(59795630, NULL, 'hirokawa.asuka', '1984-06-08', 'l', '8734525  広島県坂本市北区吉本町大垣7-3-6', '31214735', 'kristen', 'Rekayasa Perangkat Lunak'),
-(59898670, NULL, 'yamaguchi.kana', '2007-11-05', 'l', '2869244  山口県田中市中央区桐山町村山6-3-6', '58477812', 'islam', 'otomotif'),
-(61804583, NULL, 'dsasada', '2019-06-12', 'p', '4571458  佐賀県小林市中央区伊藤町佐藤7-9-8 ハイツ藤本106号', '73003632', 'islam', 'otomotif'),
-(62473638, NULL, 'kazuya.harada', '2007-10-14', 'l', '4275503  鹿児島県野村市東区若松町原田5-8-1 コーポ小林109号', '31067330', 'kristen', 'Rekayasa Perangkat Lunak'),
-(64026580, NULL, 'laota', '2005-08-20', 'p', '9391588  埼玉県井上市西区大垣町渚8-10-4', '58367112', 'islam', 'otomotif'),
-(65376284, NULL, 'yuki.kondo', '1996-06-22', 'p', '2451976  宮崎県藤本市北区中津川町渡辺3-3-9 コーポ中津川103号', '32734379', 'islam', 'otomotif'),
-(65883147, NULL, 'watanabe.yui', '1970-02-13', 'l', '9576967  宮城県津田市西区廣川町青山7-4-10', '75559807', 'kristen', 'Rekayasa Perangkat Lunak'),
-(67466325, NULL, 'jun74', '1985-05-30', 'p', '1155716  長崎県田辺市東区高橋町笹田7-5-5', '52329580', 'kristen', 'Rekayasa Perangkat Lunak'),
-(67872575, NULL, 'sato.shuhei', '2008-08-23', 'l', '5592246  千葉県渚市西区村山町西之園7-5-7 ハイツ宇野110号', '61948746', 'kristen', 'otomotif'),
-(67890207, NULL, 'kobayashi.mai', '1973-07-19', 'p', '3663562  山梨県宮沢市東区渚町江古田7-4-4', '46198494', 'kristen', 'otomotif'),
-(70590683, NULL, 'mai35', '1991-10-09', 'l', '5221883  奈良県井高市西区田中町村山1-9-9', '99672505', 'kristen', 'Rekayasa Perangkat Lunak'),
-(72236241, NULL, 'isasada', '2009-06-04', 'l', '3272641  奈良県村山市西区青山町工藤4-1-5 ハイツ山本104号', '42661790', 'kristen', 'otomotif'),
-(75175954, NULL, 'taichi.harada', '1998-11-29', 'l', '2081616  島根県鈴木市西区工藤町松本10-10-3 ハイツ杉山107号', '69853516', 'islam', 'Rekayasa Perangkat Lunak'),
-(82011570, NULL, 'qyoshimoto', '1982-12-11', 'p', '7562078  大分県村山市中央区山田町工藤7-9-6 コーポ中津川101号', '25448168', 'kristen', 'otomotif'),
-(85815468, NULL, 'naoki17', '1990-06-15', 'l', '5115753  徳島県渡辺市中央区佐藤町石田5-3-4 コーポ鈴木104号', '35580041', 'kristen', 'Rekayasa Perangkat Lunak'),
-(86364848, NULL, 'kondo.minoru', '1987-02-12', 'l', '3839321  岩手県坂本市南区若松町井上1-8-6', '65794694', 'kristen', 'otomotif'),
-(86861063, NULL, 'yuta23', '1971-02-09', 'l', '9716379  宮城県山田市北区斉藤町吉田9-9-2', '41734664', 'islam', 'otomotif'),
-(86925014, NULL, 'naoko.nagisa', '2008-07-01', 'p', '2975989  沖縄県宮沢市東区山口町中村10-10-8 ハイツ桐山110号', '57615230', 'islam', 'Rekayasa Perangkat Lunak'),
-(91072234, NULL, 'momoko24', '1979-05-21', 'p', '3656742  三重県中村市西区中島町石田6-2-1 コーポ浜田101号', '47039576', 'islam', 'otomotif'),
-(92411688, NULL, 'fkobayashi', '1981-10-31', 'l', '8122149  埼玉県佐々木市西区村山町山岸7-10-4 ハイツ坂本110号', '24171675', 'islam', 'otomotif'),
-(93044006, NULL, 'tomoya76', '2020-04-28', 'p', '3945815  熊本県江古田市北区工藤町笹田2-9-1', '89510801', 'kristen', 'otomotif'),
-(99267241, NULL, 'hiroshi.suzuki', '1980-09-08', 'l', '8513720  沖縄県井高市東区小泉町原田4-5-5 コーポ藤本109号', '22352179', 'islam', 'otomotif');
+(10328542, 93344760, 'eaoyama', '2022-08-25', 'l', '2492413  福井県高橋市東区松本町浜田3-7-4', '06651-3-0151', 'Konghucu', 'Teknik Komputer dan Jaringan'),
+(11567171, 93191295, 'yoko.tsuda', '1984-11-04', 'p', '3801300  岩手県中島市北区西之園町田辺5-5-7 コーポ杉山109号', '015-279-2535', 'Katolik', 'Rekayasa Perangkat Lunak'),
+(15645787, 93972096, 'jsasada', '1995-02-13', 'l', '7329446  滋賀県小林市南区渡辺町田辺4-6-1 ハイツ大垣108号', '008-519-2483', 'Katolik', 'Teknik Instalasi Tenaga Listrik'),
+(16703171, 95474959, 'matsumoto.minoru', '1993-02-04', 'l', '6817360  愛知県工藤市東区山本町杉山10-4-4 ハイツ笹田101号', '0648-87-0558', 'Hindu', 'Teknik Pemesinan'),
+(21743310, 91638904, 'byamaguchi', '1991-05-18', 'l', '9668381  石川県加納市西区桐山町杉山2-6-9 ハイツ村山103号', '0640-281-838', 'Islam', 'Teknik Pemesinan'),
+(22350539, 93191295, 'idaka.mai', '1979-06-15', 'p', '3913463  三重県青田市南区山口町小泉10-5-1', '090-4986-5868', 'Kristen Protestan', 'Teknik Instalasi Tenaga Listrik'),
+(24346900, 93199995, 'mikako96', '1995-08-08', 'p', '5437467  群馬県井高市西区中島町山口8-9-3 コーポ近藤103号', '00335-0-5122', 'Konghucu', 'Teknik Gambar Bangunan'),
+(24585945, 91404553, 'vkijima', '2021-09-16', 'l', '5385233  宮城県中村市東区田辺町渚3-10-1 コーポ桐山103号', '053-129-1921', 'Kristen Protestan', 'Teknik Pemesinan'),
+(25510843, 89047200, 'xnakajima', '1976-02-01', 'p', '5713284  滋賀県桐山市西区津田町青田4-9-10', '094-960-6175', 'Hindu', 'Teknik Komputer dan Jaringan'),
+(27345703, 90671033, 'sayuri.saito', '1972-01-15', 'l', '1126013  神奈川県原田市南区鈴木町吉田8-3-8', '080-972-8888', 'Buddha', 'Teknik Audio Video'),
+(28363181, 96918984, 'kaori.nakamura', '1998-03-16', 'p', '7364028  岩手県小泉市西区青山町山岸3-8-7', '09-0825-9572', 'Hindu', 'Teknik Audio Video'),
+(28837012, 89047200, 'kanou.yoko', '1980-09-08', 'l', '2664633  新潟県杉山市西区山本町山本6-5-5 ハイツ田中103号', '080-9814-2830', 'Kristen Protestan', 'Teknik Instalasi Tenaga Listrik'),
+(29340557, 91638904, 'nsuzuki', '1971-05-24', 'p', '7844772  岡山県吉田市東区山岸町山田5-9-5 コーポ渚101号', '00-8021-4399', 'Islam', 'Teknik Komputer dan Jaringan'),
+(31580541, 93972096, 'kana23', '1980-09-09', 'l', '1643071  奈良県松本市西区田中町桐山8-7-4 コーポ桐山103号', '080-6058-1809', 'Konghucu', 'Teknik Pemesinan'),
+(32404265, 90671033, 'saito.tomoya', '2010-10-10', 'l', '1892750  宮崎県浜田市南区桐山町小林7-3-2', '080-1264-9727', 'Konghucu', 'Teknik Instalasi Tenaga Listrik'),
+(36517069, 93022510, 'kazuya.kijima', '1986-04-05', 'l', '5553949  広島県井上市西区西之園町宇野9-1-10', '068-833-5893', 'Buddha', 'Teknik Pemesinan'),
+(36839416, 96089847, 'tyamaguchi', '1980-01-08', 'l', '9166052  北海道近藤市南区江古田町山本8-4-8 ハイツ原田105号', '045-183-1370', 'Katolik', 'Teknik Komputer dan Jaringan'),
+(40968668, 93199995, 'htakahashi', '1986-12-15', 'l', '4687539  東京都野村市南区井高町中村8-4-8', '01180-3-0238', 'Kristen Protestan', 'Teknik Instalasi Tenaga Listrik'),
+(41284377, 93191295, 'rika76', '1985-01-09', 'l', '2397169  和歌山県斉藤市西区加藤町田中9-3-3', '090-6428-0368', 'Islam', 'Rekayasa Perangkat Lunak'),
+(42585903, 91912706, 'hiroshi22', '1974-07-20', 'l', '2302629  岩手県近藤市北区桐山町田中8-7-3 コーポ田中107号', '060-144-8418', 'Kristen Protestan', 'Teknik Gambar Bangunan'),
+(53813793, 93344760, 'yoko.watanabe', '1997-08-27', 'l', '6922011  鳥取県村山市東区山口町山田5-4-9 コーポ木村106号', '054-124-6669', 'Kristen Protestan', 'Office Administration'),
+(53935158, 90254266, 'yosuke.ekoda', '2011-03-17', 'p', '7507260  山口県佐藤市中央区小泉町西之園4-6-10', '06193-2-3080', 'Buddha', 'Office Administration'),
+(54156835, 98964721, 'atsushi36', '1988-12-26', 'l', '4703253  岐阜県廣川市中央区斉藤町渚9-7-7', '0670-19-5376', 'Konghucu', 'Teknik Audio Video'),
+(56402716, 89047200, 'itakahashi', '2004-06-08', 'l', '6576528  神奈川県村山市中央区吉本町喜嶋9-8-5', '090-0156-4944', 'Kristen Protestan', 'Teknik Instalasi Tenaga Listrik'),
+(57302150, 96089847, 'manabu.kimura', '2012-01-20', 'p', '7924315  東京都村山市東区山田町山田6-6-8', '090-2976-2351', 'Buddha', 'Teknik Instalasi Tenaga Listrik'),
+(59741231, 93191295, 'naoko57', '1988-12-21', 'p', '5381375  山梨県鈴木市南区桐山町田中6-3-2 ハイツ佐藤102号', '021-693-7075', 'Katolik', 'Teknik Instalasi Tenaga Listrik'),
+(60667597, 90671033, 'sayuri78', '1979-09-04', 'l', '7038645  鳥取県大垣市中央区西之園町小林4-9-1 ハイツ浜田109号', '08-2102-3355', 'Islam', 'Teknik Komputer dan Jaringan'),
+(60922557, 91404553, 'yasuhiro.nishinosono', '1995-12-05', 'p', '7237908  広島県中島市西区青田町加納3-8-4 コーポ青田104号', '03599-4-7933', 'Buddha', 'Teknik Komputer dan Jaringan'),
+(61031186, 93199995, 'cyoshida', '2017-08-19', 'p', '7263584  富山県小林市中央区近藤町浜田2-8-1 コーポ近藤110号', '080-3897-6036', 'Katolik', 'Office Administration'),
+(63442534, 93972096, 'tomoya27', '1996-08-18', 'p', '8384452  広島県佐々木市南区山口町杉山8-6-3', '0801-61-0346', 'Hindu', 'Teknik Pemesinan'),
+(66004878, 96918984, 'skobayashi', '1997-02-05', 'p', '7444628  岡山県渚市中央区坂本町中島2-9-4 コーポ杉山110号', '0970-001-852', 'Buddha', 'Office Administration'),
+(66906725, 93022510, 'mai.tanaka', '1970-10-21', 'l', '6378449  長崎県近藤市西区鈴木町浜田6-3-8', '0920-061-861', 'Hindu', 'Rekayasa Perangkat Lunak'),
+(66980062, 91404352, 'yamagishi.ryosuke', '2009-02-12', 'l', '4233975  和歌山県山田市東区井上町浜田1-8-9', '00-6471-1534', 'Islam', 'Teknik Pemesinan'),
+(66986072, 93022510, 'harada.naoto', '2019-06-08', 'p', '3863810  山梨県鈴木市中央区坂本町野村3-1-9', '063-056-0630', 'Konghucu', 'Teknik Instalasi Tenaga Listrik'),
+(70886024, 91638904, 'nakajima.soutaro', '2020-11-13', 'l', '5203861  北海道桐山市西区津田町宮沢3-8-9', '05863-9-1845', 'Konghucu', 'Teknik Komputer dan Jaringan'),
+(71163625, 96089847, 'hanako36', '2019-10-16', 'l', '1894869  滋賀県坂本市東区山岸町村山8-9-9 コーポ高橋104号', '0042-84-6616', 'Kristen Protestan', 'Teknik Komputer dan Jaringan'),
+(71699383, 99762217, 'kondo.yui', '2010-06-30', 'p', '7536072  山形県高橋市南区坂本町斉藤8-6-4 コーポ加納110号', '080-1723-1414', 'Konghucu', 'Teknik Gambar Bangunan'),
+(72367620, 96089847, 'akemi.sugiyama', '2019-07-06', 'p', '1533647  埼玉県石田市西区佐藤町山田4-6-6', '061-545-0843', 'Konghucu', 'Office Administration'),
+(74199913, 90254266, 'kazuya.miyazawa', '2019-07-14', 'p', '1507701  千葉県加納市南区坂本町野村4-8-4', '080-9096-6874', 'Katolik', 'Rekayasa Perangkat Lunak'),
+(74264429, 94474940, 'hanako.sugiyama', '1973-07-21', 'p', '6393480  滋賀県江古田市東区西之園町工藤5-9-3', '0042-99-6642', 'Kristen Protestan', 'Teknik Komputer dan Jaringan'),
+(81255268, 93975010, 'yumiko.kijima', '2016-05-03', 'p', '4157694  山梨県浜田市東区高橋町喜嶋9-7-5', '080-2696-3594', 'Buddha', 'Teknik Pemesinan'),
+(81934007, 91697310, 'fujimoto.soutaro', '1981-01-17', 'l', '5908434  富山県小林市南区工藤町村山3-5-3 ハイツ加藤109号', '0204-21-1541', 'Katolik', 'Rekayasa Perangkat Lunak'),
+(84139728, 96089847, 'yuta.idaka', '1974-05-31', 'p', '4543093  茨城県青田市北区野村町加藤2-9-1', '0810-262-500', 'Hindu', 'Teknik Audio Video'),
+(85083325, 93199995, 'nakamura.shota', '1996-04-12', 'l', '8448843  三重県笹田市西区中村町中村1-10-2', '080-8649-6221', 'Konghucu', 'Office Administration'),
+(85591409, 99762217, 'vyamada', '1981-12-01', 'l', '7774954  神奈川県若松市西区青田町三宅2-5-4', '080-5819-1408', 'Kristen Protestan', 'Teknik Gambar Bangunan'),
+(85649309, 94474940, 'nagisa.momoko', '1995-06-28', 'p', '9411017  滋賀県杉山市中央区西之園町村山7-10-7', '015-403-2876', 'Kristen Protestan', 'Teknik Audio Video'),
+(89227875, 89047200, 'soutaro.sasada', '1993-03-12', 'p', '2429164  青森県伊藤市中央区青田町石田10-8-1 コーポ青田108号', '0300-200-425', 'Buddha', 'Teknik Gambar Bangunan'),
+(92908773, 91404553, 'gnakamura', '2022-11-30', 'l', '9012634  神奈川県渚市東区中村町宇野2-7-9', '0850-326-208', 'Konghucu', 'Rekayasa Perangkat Lunak'),
+(97850554, 94574911, 'uyamamoto', '1981-04-17', 'p', '5306643  宮城県山岸市南区若松町大垣10-5-9', '02557-7-2223', 'Katolik', 'Teknik Gambar Bangunan');
 
 --
 -- Indexes for dumped tables
@@ -293,13 +340,13 @@ ALTER TABLE `siswas`
 -- AUTO_INCREMENT for table `kelas`
 --
 ALTER TABLE `kelas`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=98925264;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=99762218;
 
 --
 -- AUTO_INCREMENT for table `nilai`
 --
 ALTER TABLE `nilai`
-  MODIFY `kd_nilai` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
+  MODIFY `kd_nilai` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
 
 --
 -- Constraints for dumped tables
@@ -309,7 +356,7 @@ ALTER TABLE `nilai`
 -- Constraints for table `kelas`
 --
 ALTER TABLE `kelas`
-  ADD CONSTRAINT `kelas_ibfk_1` FOREIGN KEY (`kode_guru`) REFERENCES `gurus` (`kode_guru`);
+  ADD CONSTRAINT `kelas_ibfk_1` FOREIGN KEY (`kode_guru`) REFERENCES `gurus` (`kode_guru`) ON DELETE SET NULL ON UPDATE RESTRICT;
 
 --
 -- Constraints for table `mapel`
@@ -322,13 +369,13 @@ ALTER TABLE `mapel`
 --
 ALTER TABLE `nilai`
   ADD CONSTRAINT `nilai_ibfk_1` FOREIGN KEY (`kd_mapel`) REFERENCES `mapel` (`kode_mapel`) ON DELETE RESTRICT ON UPDATE CASCADE,
-  ADD CONSTRAINT `nilai_ibfk_2` FOREIGN KEY (`nis_siswa`) REFERENCES `siswas` (`nis`) ON DELETE RESTRICT ON UPDATE CASCADE;
+  ADD CONSTRAINT `nilai_ibfk_2` FOREIGN KEY (`nis_siswa`) REFERENCES `siswas` (`nis`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `siswas`
 --
 ALTER TABLE `siswas`
-  ADD CONSTRAINT `siswas_ibfk_1` FOREIGN KEY (`id_kelas`) REFERENCES `kelas` (`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
+  ADD CONSTRAINT `siswas_ibfk_1` FOREIGN KEY (`id_kelas`) REFERENCES `kelas` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

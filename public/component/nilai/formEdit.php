@@ -1,10 +1,11 @@
 <?php
-$id = (isset($_GET['i'])) ? $_GET['i'] : die('Unauthorized');
+$id = (isset($_GET['i']) && isset($_GET['r'])) ? [$_GET['i'], $_GET['r']] : die('Unauthorized');
+$nis = $id[0];
+$kd = $id[1];
 
 $connection = connect();
 
-$query = "SELECT * FROM nilai n JOIN siswas s ON s.nis = n.nis_siswa JOIN kelas k ON k.id = s.id_kelas WHERE n.nis_siswa = '$id'";
-
+$query = "SELECT * FROM nilai n JOIN siswas s ON s.nis = n.nis_siswa JOIN kelas k ON k.id = s.id_kelas WHERE n.nis_siswa = '{$nis}' AND n.kd_nilai = {$kd}";
 
 $datas = $connection->query($query);
 
@@ -16,6 +17,8 @@ if (is_null($data)) {
 ?>
 
 <form class="mx-auto mt-16 max-w-5xl sm:mt-20" action="nilai/store.php" method="post">
+  <input type="hidden" name="mpl" value="<?= $data->kd_mapel ?>">
+  <input type="hidden" name="kls" value="<?= $data->nama ?>">
   <div class=" mx-auto w-full">
     <div class="mt-2 w-full">
       <div class="mb-3">
@@ -26,7 +29,7 @@ if (is_null($data)) {
       </div>
       <div class="mb-3">
         <div class="relative z-0 w-full mb-6 group">
-          <input type="text" name="kelas" id="kelas" disabled value="<?= $data->kelas ?? null ?>" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
+          <input type="text" name="kelas" id="kelas" disabled value="<?= $data->nama ?? null ?>" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
           <label for="kelas" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Kelas</label>
         </div>
       </div>
@@ -64,6 +67,6 @@ if (is_null($data)) {
     <div class="mt-5">
       <input type="submit" value="Kirim" class="block w-full rounded-md bg-indigo-600 px-3.5 py-2.5 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
     </div>
-    <input type="hidden" name="nis" value="<?= $id ?>">
+    <input type="hidden" name="nis" value="<?= $id[0] ?>">
   </div>
 </form>

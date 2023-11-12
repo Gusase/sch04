@@ -1,4 +1,4 @@
-<nav class="sticky top-0 z-40 w-full backdrop-blur-sm duration-300 transition-all lg:border-b lg:border-slate-900/10 dark:border-slate-50/[0.06] bg-white/80 dark:bg-slate-900/90">
+<nav class="sticky top-0 font-subHeading z-40 w-full backdrop-blur-sm duration-300 transition-all lg:border-b lg:border-slate-900/10 dark:border-slate-50/[0.06] bg-white/80 dark:bg-slate-900/90">
   <div class="max-w-screen-lg flex flex-wrap items-center justify-between mx-auto p-4">
     <a href="" class="flex items-center justify-center space-x-3">
       <img src="https://avatars.githubusercontent.com/u/112738383?v=4" class="aspect-square w-7 rounded-full object-cover" alt="">

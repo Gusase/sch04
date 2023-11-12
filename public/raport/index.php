@@ -8,7 +8,7 @@ try {
     );
   }
 
-  $query = "SELECT * from kelas kl LEFT JOIN gurus gr ON gr.kode_guru = kl.kode_guru ORDER BY kl.nama ASC";
+  $query = "SELECT s.nis,s.nama_lengkap AS nama_siswa,k.nama AS nama_kelas FROM siswas s INNER JOIN kelas k ON k.id = s.id_kelas ORDER BY s.nama_lengkap";
 
   $datas = $connection->query($query);
   $byk = mysqli_num_rows($datas);
@@ -19,39 +19,40 @@ try {
 
   $connection->close();
 } catch (\Throwable $e) {
-  $error = $e->getMessage();
+  $errors = $e->getMessage();
 }
 
 ?>
 
-<section class="container mx-auto bg-white dark:bg-gray-900 mt-14 ">
+
+<section class="container mx-auto bg-white dark:bg-gray-900 mt-14">
   <div class="flex-row items-center justify-between p-4 space-y-3 rounded-ss-lg dark:bg-gray-800 sm:flex sm:space-y-0 sm:space-x-4">
     <div>
-      <h4 class="mr-3 text-2xl font-semibold dark:text-white font-heading">Semua kelas</h4>
-      <p class="mt-1 text-sm font-normal text-gray-500 dark:text-gray-400 font-subHeading"><?= $byk > 0 ? "Menampilkan $byk kelas" : 'Tidak ada data kelas'; ?></p>
+      <h4 class="mr-3 text-2xl font-semibold dark:text-white font-heading">Raport siswa</h4>
+      <p class="mt-1 text-sm font-normal text-gray-500 dark:text-gray-400 font-subHeading"><?= $byk > 0 ? "Menampilkan $byk data raport" : 'Tidak ada data raport'; ?></p>
     </div>
     <button data-modal-target="authentication-modal" id="addsiswa" data-modal-toggle="authentication-modal" class="text-white capitalize bg-[#404eed] hover:bg-blue-800/95 focus:ring-2 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center mr-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
       <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5 mr-2 -ml-1" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
         <path d="M8 9a3 3 0 100-6 3 3 0 000 6zM8 11a6 6 0 016 6H2a6 6 0 016-6zM16 7a1 1 0 10-2 0v1h-1a1 1 0 100 2h1v1a1 1 0 102 0v-1h1a1 1 0 100-2h-1V7z"></path>
       </svg>
-      tambah kelas
+      tambah mapel
     </button>
   </div>
   <div class="relative overflow-x-auto shadow-md sm:rounded-bb-lg">
-    <table class="w-full text-sm text-center text-gray-500 dark:text-gray-400">
-      <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400 sticky">
+    <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+      <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
         <tr>
           <th scope="col" class="px-6 py-3">
-            no
+            nO
           </th>
-          <th scope="col" class="px-6 py-3 w-1/5">
-            nama
+          <th scope="col" class="px-6 py-3">
+            nis
           </th>
-          <th scope="col" class="px-6 py-3 w-1/5">
-            kapasitas kelas
+          <th scope="col" class="px-6 py-3">
+            nama siswa
           </th>
-          <th scope="col" class="px-6 py-3 w-full">
-            nama guru
+          <th scope="col" class="px-6 py-3">
+            kelas
           </th>
           <th scope="col" class="px-6 py-3">
             <span class="sr-only">Action</span>
@@ -66,33 +67,33 @@ try {
               <?= $i ?>
             </th>
             <td class="px-6 py-4">
-              <?= $data->nama; ?>
+              <?= $data->nis; ?>
             </td>
             <td class="px-6 py-4">
-              <?= $data->kapasitas; ?>
+              <?= str_replace('.', ' ', ucfirst($data->nama_siswa)) ?>
             </td>
             <td class="px-6 py-4">
-              <?= is_null($data->nama_guru) ? '~' : str_replace('.', ' ', ucfirst($data->nama_guru)) ?>
+              <?= $data->nama_kelas; ?>
             </td>
             <td class="px-6 py-4 text-right inline-flex">
-              <a href="?v=kelas&i=<?= $data->id ?>&m=edit" class="text-white capitalize bg-[#404eed] hover:bg-blue-800/95 focus:ring-2 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center mr-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5 mr-2 -ml-1" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                  <path d="M8 9a3 3 0 100-6 3 3 0 000 6zM8 11a6 6 0 016 6H2a6 6 0 016-6zM16 7a1 1 0 10-2 0v1h-1a1 1 0 100 2h1v1a1 1 0 102 0v-1h1a1 1 0 100-2h-1V7z"></path>
+              <a href="?v=raport&i=<?= $data->nis; ?>&m=print" class="text-white capitalize bg-[#404eed] hover:bg-blue-800/95 focus:ring-2 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center mr-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                <svg class="h-3.5 w-3.5 mr-2 -ml-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 19">
+                  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 15h.01M4 12H2a1 1 0 0 0-1 1v4a1 1 0 0 0 1 1h16a1 1 0 0 0 1-1v-4a1 1 0 0 0-1-1h-3M9.5 1v10.93m4-3.93-4 4-4-4" />
                 </svg>
-                edit
+                cetak
               </a>
-              <button data-modal-target="modal-#<?= $data->id ?>" data-modal-toggle="modal-#<?= $data->id ?>" class="text-white capitalize bg-[#404eed] hover:bg-blue-800/95 focus:ring-2 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center mr-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800" type="button">
+              <!-- Modal toggle -->
+              <button data-modal-target="defaultModal-#<?= $data->nis ?>" data-modal-toggle="defaultModal-#<?= $data->nis ?>" class="text-white capitalize bg-[#404eed] hover:bg-blue-800/95 focus:ring-2 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center mr-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800" type="button">
                 Hapus
               </button>
-              <!-- Modal toggle -->
 
               <!-- Main modal -->
-              <div id="modal-#<?= $data->id ?>" tabindex="-1" aria-hidden="true" class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
+              <div id="defaultModal-#<?= $data->nis ?>" tabindex="-1" aria-hidden="true" class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
                 <div class="relative w-full max-w-md max-h-full">
                   <!-- Modal content -->
                   <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
                     <!-- Modal header -->
-                    <div class="flex items-start text-left justify-between p-4 border-b rounded-t dark:border-gray-600">
+                    <div class="flex items-start justify-between p-4 border-b rounded-t dark:border-gray-600">
                       <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
                         Peringatan
                       </h3>
@@ -106,21 +107,20 @@ try {
                     <!-- Modal body -->
                     <div class="p-6 text-left">
                       <p class="text-base leading-relaxed text-gray-500 dark:text-gray-300">
-                        Kamu akan menhapus kelas <b class="capitalize"><?= $data->nama; ?></b> dari database, Anda yakin?
+                        Kamu akan menhapus pelajaran <b class="capitalize"><?= $data->nama_mapel; ?></b>, Anda yakin?
                       </p>
                     </div>
                     <!-- Modal footer -->
                     <div class="flex items-center p-6 space-x-2 border-t border-gray-200 rounded-b dark:border-gray-600">
-                      <form action="kelas/destroy.php" method="post">
-                        <input type="hidden" name="k" value="<?= $data->id; ?>">
-                        <button data-modal-hide="modal-#<?= $data->id ?>" type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-red-500 dark:hover:bg-red-600 dark:focus:ring-red-800">Ok</button>
+                      <form action="mapel/destroy.php" method="post">
+                        <input type="hidden" name="k" value="<?= $data->nis; ?>">
+                        <button data-modal-hide="defaultModal-#<?= $data->nis ?>" type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-red-500 dark:hover:bg-red-600 dark:focus:ring-red-800">Ok</button>
                       </form>
-                      <button data-modal-hide="modal-#<?= $data->id ?>" class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">Batal</button>
+                      <button data-modal-hide="defaultModal-#<?= $data->nis ?>" class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">Batal</button>
                     </div>
                   </div>
                 </div>
               </div>
-
             </td>
           </tr>
         <?php $i++;

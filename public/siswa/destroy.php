@@ -1,11 +1,12 @@
 <?php
+session_start();
 require_once '../../config/database.php';
 
 if (isset($_POST['nama'])) {
   $connection = connect();
 
   $id = $_POST['nama'];
-  $query = "DELETE FROM siswas WHERE siswas.nama_lengkap = '$id'";
+  $query = "DELETE FROM siswas s WHERE s.nama_lengkap = '$id'";
   // $query = "delete from nilai where id = '$id'";
   $datas = mysqli_query($connection, $query);
   // $name = $name->fetch_object();
@@ -13,11 +14,11 @@ if (isset($_POST['nama'])) {
 
   if (!$datas) {
     $_SESSION['info'] = "Siswa masih disini";
-    header('Location: http://ev.final.eva/?v=siswa');
+    header('Location: http://ev.final.test/?v=siswa');
     exit;
   }
 
   $_SESSION['info'] = "Siswa adios";
-  header('Location: http://ev.final.eva/?v=siswa');
+  header('Location: http://ev.final.test/?v=siswa');
   exit;
 }

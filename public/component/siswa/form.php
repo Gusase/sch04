@@ -1,93 +1,105 @@
-  <div class="relative w-full max-w-md max-h-full">
-    <!-- Modal content -->
-    <div class="relative bg-white rounded-lg shadow-2xl dark:bg-gray-700">
-      <button type="button" class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="authentication-modal">
-        <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
-          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
-        </svg>
-        <span class="sr-only">Close modal</span>
-      </button>
+<?php require_once __DIR__ . '/../../../utils/Helper.php'; ?>
+<div class="relative w-full max-w-md max-h-full">
+  <!-- Modal content -->
+  <div class="relative bg-white rounded-lg shadow-2xl dark:bg-gray-700">
+    <button type="button" class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="authentication-modal">
+      <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+      </svg>
+      <span class="sr-only">Close modal</span>
+    </button>
 
 
-      <form action="siswa/store.php" method="post" class="relative w-full max-w-md max-h-full">
-        <!-- Modal content -->
-        <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
-          <button type="button" class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="authentication-modal" fdprocessedid="sae9pi">
-            <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
-              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"></path>
-            </svg>
-            <span class="sr-only">Close modal</span>
-          </button>
-          <div class="px-6 py-6 lg:px-8">
-            <h3 class="mb-4 text-xl md:text-2xl font-medium text-gray-900 dark:text-white">Tambah siswa baru</h3>
+    <form action="siswa/store.php" method="post" class="relative w-full max-w-md max-h-full">
+      <!-- Modal content -->
+      <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+        <button type="button" class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="authentication-modal" fdprocessedid="sae9pi">
+          <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"></path>
+          </svg>
+          <span class="sr-only">Close modal</span>
+        </button>
+        <div class="px-6 py-6 lg:px-8">
+          <h3 class="mb-4 text-xl md:text-2xl font-medium text-gray-900 dark:text-white">Tambah siswa baru</h3>
 
-            <div>
-              <label for="nis" class="capitalize block mb-2 mt-3 text-sm font-medium text-gray-900 dark:text-white">nis</label>
-              <input type="number" name="nis" id="nis" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="~" fdprocessedid="pybon">
-            </div>
-            <div>
-              <label for="nama" class="capitalize block mb-2 mt-3 text-sm font-medium text-gray-900 dark:text-white">nama</label>
-              <input type="text" name="nama" id="nama" placeholder="~" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" fdprocessedid="ju39cs">
-            </div>
-            <div>
-              <label for="tanggal" class="capitalize block mb-2 mt-3 text-sm font-medium text-gray-900 dark:text-white">tanggal lahir</label>
-              <input type="date" name="tanggal" id="tanggal" placeholder="~" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white">
-            </div>
-            <div>
-              <label for="nomor" class="capitalize block mb-2 mt-3 text-sm font-medium text-gray-900 dark:text-white">nomor telepon</label>
-              <input type="number" name="nomor" id="nomor" placeholder="~" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" fdprocessedid="ndtfi">
-            </div>
-            <div>
-              <h4 class="mb-4 md:mb-2  mt-3 capitalize text-sm font-medium text-gray-900 dark:text-white">jenis kelamin</h4>
-              <ul class="grid w-full gap-4 md:grid-cols-2">
-                <li>
-                  <input type="radio" id="lakilaki" name="gender" value="l" class="hidden peer">
-                  <label for="lakilaki" class="capitalize capitalize inline-flex justify-center items-center w-full p-3 md:p-4 text-gray-500 bg-white border border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-600 dark:peer-checked:text-blue-500 peer-checked:border-blue-600 peer-checked:text-blue-600 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-600">
-                    <div class="block">
-                      <div class="w-full text-base">Laki-laki</div>
-                    </div>
-                  </label>
-                </li>
-                <li>
-                  <input type="radio" id="perempuan" name="gender" value="p" class="hidden peer">
-                  <label for="perempuan" class="capitalize capitalize inline-flex justify-center items-center w-full p-3 md:p-4 text-gray-500 bg-white border border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-blue-500 peer-checked:border-blue-600 peer-checked:text-blue-600 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-600">
-                    <div class="block">
-                      <div class="w-full text-base">Perempuan</div>
-                    </div>
-                  </label>
-                </li>
-              </ul>
-            </div>
-            <div>
-              <label for="alamat" class="capitalize block mb-2 mt-3 text-sm font-medium text-gray-900 dark:text-white">alamat</label>
-              <textarea id="alamat" rows="4" name="alamat" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Alamat lengkap..."></textarea>
-            </div>
-            <div>
-              <label for="sel" class="capitalize block mb-2 mt-3 text-sm font-medium text-gray-900 dark:text-white">Agama</label>
-              <select id="sel" name="agama" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" fdprocessedid="7bq3m7">
-                <option value="x">~</option>
-                <option value="islam">Islam</option>
-                <option value="kristen">Kristen</option>
-              </select>
-            </div>
-            <div>
-              <label for="jurs" class="capitalize block mb-2 mt-3 text-sm font-medium text-gray-900 dark:text-white">Jurusan</label>
-              <select id="jurs" name="jurusan" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" fdprocessedid="yngzd">
-                <option value="x">~</option>
-                <option value="Rekayasa Perangkat Lunak">Rekayasa perangkat lunak</option>
-                <option value="Otomotif">otomotif</option>
-              </select>
-            </div>
-
-            <div class="flex items-center pt-6 pb-3 space-x-2 border-t border-gray-200 rounded-b dark:border-gray-600">
-              <button type="submit" class="text-white uppercase bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" fdprocessedid="3qf5km">tambah</button>
-              <button data-modal-hide="authentication-modal" type="reset" class="text-gray-500 uppercase bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600" fdprocessedid="c5ftij">kembali</button>
-            </div>
-
+          <div>
+            <label for="nis" class="capitalize block mb-2 mt-3 text-sm font-medium text-gray-900 dark:text-white">nis</label>
+            <input type="number" name="nis" id="nis" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="~" fdprocessedid="pybon">
           </div>
+          <div>
+            <label for="nama" class="capitalize block mb-2 mt-3 text-sm font-medium text-gray-900 dark:text-white">nama</label>
+            <input type="text" name="nama" id="nama" placeholder="~" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" fdprocessedid="ju39cs">
+          </div>
+          <div>
+            <label for="tanggal" class="capitalize block mb-2 mt-3 text-sm font-medium text-gray-900 dark:text-white">tanggal lahir</label>
+            <input type="date" name="tanggal" id="tanggal" placeholder="~" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white">
+          </div>
+          <div>
+            <label for="nomor" class="capitalize block mb-2 mt-3 text-sm font-medium text-gray-900 dark:text-white">nomor telepon</label>
+            <input type="number" name="nomor" id="nomor" placeholder="~" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" fdprocessedid="ndtfi">
+          </div>
+          <div>
+            <h4 class="mb-4 md:mb-2  mt-3 capitalize text-sm font-medium text-gray-900 dark:text-white">jenis kelamin</h4>
+            <ul class="grid w-full gap-4 md:grid-cols-2">
+              <li>
+                <input type="radio" id="lakilaki" name="gender" value="l" class="hidden peer">
+                <label for="lakilaki" class="capitalize capitalize inline-flex justify-center items-center w-full p-3 md:p-4 text-gray-500 bg-white border border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-600 dark:peer-checked:text-blue-500 peer-checked:border-blue-600 peer-checked:text-blue-600 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-600">
+                  <div class="block">
+                    <div class="w-full text-base">Laki-laki</div>
+                  </div>
+                </label>
+              </li>
+              <li>
+                <input type="radio" id="perempuan" name="gender" value="p" class="hidden peer">
+                <label for="perempuan" class="capitalize capitalize inline-flex justify-center items-center w-full p-3 md:p-4 text-gray-500 bg-white border border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-blue-500 peer-checked:border-blue-600 peer-checked:text-blue-600 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-600">
+                  <div class="block">
+                    <div class="w-full text-base">Perempuan</div>
+                  </div>
+                </label>
+              </li>
+            </ul>
+          </div>
+          <div>
+            <label for="alamat" class="capitalize block mb-2 mt-3 text-sm font-medium text-gray-900 dark:text-white">alamat</label>
+            <textarea id="alamat" rows="4" name="alamat" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Alamat lengkap..."></textarea>
+          </div>
+          <div>
+            <label for="sel" class="capitalize block mb-2 mt-3 text-sm font-medium text-gray-900 dark:text-white">Agama</label>
+            <select id="sel" name="agama" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" fdprocessedid="7bq3m7">
+              <option value="x">~</option>
+              <?php
+              $datasMapel = Helper::get('siswas', ['kolom' => 'agama', 'operator' => 'DISTINCT']);
+
+              foreach ($datasMapel as $data) :
+              ?>
+                <option value="<?= $data['agama'] ?>"><?= ucfirst($data['agama']) ?></option>
+              <?php endforeach; ?>
+            </select>
+          </div>
+          <div>
+            <label for="jurs" class="capitalize block mb-2 mt-3 text-sm font-medium text-gray-900 dark:text-white">Jurusan</label>
+            <select id="jurs" name="jurusan" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" fdprocessedid="yngzd">
+              <option value="x">~</option>
+              <!--semua jurusan -->
+              <?php
+              $datasMapel = Helper::get('siswas', ['kolom' => 'jurusan', 'operator' => 'DISTINCT']);
+
+              foreach ($datasMapel as $data) :
+              ?>
+                <option value="<?= $data['jurusan'] ?>"><?= ucfirst($data['jurusan']) ?></option>
+              <?php endforeach; ?>
+            </select>
+          </div>
+
+          <div class="flex items-center pt-6 pb-3 space-x-2 border-t border-gray-200 rounded-b dark:border-gray-600">
+            <button type="submit" class="text-white uppercase bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" fdprocessedid="3qf5km">tambah</button>
+            <button data-modal-hide="authentication-modal" type="reset" class="text-gray-500 uppercase bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600" fdprocessedid="c5ftij">kembali</button>
+          </div>
+
         </div>
-      </form>
+      </div>
+    </form>
 
 
-    </div>
   </div>
+</div>

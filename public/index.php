@@ -4,6 +4,7 @@ session_start();
 require_once __DIR__ . '/../vendor/autoload.php';
 require_once __DIR__ .  '/../config/database.php';
 require_once __DIR__ .  '/../utils/redirect.php';
+require_once __DIR__ . '/../utils/Helper.php';
 
 if (isset($_SESSION['errors'])) {
   $errors = $_SESSION['errors'];
@@ -18,6 +19,7 @@ if (isset($_SESSION['info'])) {
 // page
 $v = isset($_GET['v']) ? $_GET['v'] : '';
 $page = redirect($v);
+
 // if (isset($_POST['go'])) {
 //   $nama = trim($_POST['nama']);
 //   $kelas = trim($_POST['kelas']);
@@ -50,19 +52,13 @@ $page = redirect($v);
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <script src="https://cdn.tailwindcss.com"></script>
-  <!-- <link href="client/css/style.css" rel="stylesheet"> -->
+  <link href="client/css/style.css" rel="stylesheet">
   <title><?= $page['t'] ?? 'Not found' ?></title>
   <style>
     ::-webkit-scrollbar {
       width: 0 !important;
     }
   </style>
-  <script>
-    tailwind.config = {
-      darkMode: 'class',
-    }
-  </script>
 </head>
 
 <body class="antialiased text-slate-500 dark:text-slate-400 bg-white dark:bg-slate-900">
@@ -74,7 +70,7 @@ $page = redirect($v);
       <div class="container min-h-0 uppercase mx-auto">
         <div class="min-h-[80px] text-center max-w-[1480px]">
           <h1 class="text-4xl sm:text-6xl font-extrabold text-white tracking-tight mt-3"><?= $page['head'] ?? 'Where are you from?' ?></h1>
-          <div class="max-w-xl capitalize mx-auto mt-5 sm:mt-7 text-base font-inital text-gray-100">Aplikasi dalam pengembangan dalam rangka pembuatan <span class="font-semibold">CRUD</span> system</div>
+          <div class="max-w-xl capitalize mx-auto mt-5 sm:mt-7 text-base font-inital text-gray-100 font-subHeading">Aplikasi dalam pengembangan dalam rangka pembuatan <span class="font-semibold">CRUD</span> system</div>
         </div>
       </div>
       <div class="bg-gradient-to-b from-indigo-900 to-transparent dark:from-blue-900 w-full h-full absolute top-0 left-0 -z-10"></div>
@@ -96,7 +92,7 @@ $page = redirect($v);
             <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
           </svg>
           <span class="sr-only">Info</span>
-          <div class="ml-3 text-sm font-medium">
+          <div class="ml-3 text-sm font-medium font-subHeading">
             <span class="uppercase"><?= $info ?? 'asuka' ?></span>
           </div>
           <button type="button" class="ml-auto -mx-1.5 -my-1.5 bg-green-50 text-green-500 rounded-lg focus:ring-2 focus:ring-green-400 p-1.5 hover:bg-green-200 inline-flex items-center justify-center h-8 w-8 dark:bg-gray-800 dark:text-green-400 dark:hover:bg-gray-700" data-dismiss-target="#alert-<?= $index ?? 'aa' ?>" aria-label="Close">
@@ -114,7 +110,7 @@ $page = redirect($v);
               <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
             </svg>
             <span class="sr-only">Info</span>
-            <div class="ml-3 text-sm font-medium">
+            <div class="ml-3 text-sm font-medium font-subHeading">
               Field <span class="uppercase"><?= $error ?? 'asuka' ?></span>
             </div>
             <button type="button" class="ml-auto -mx-1.5 -my-1.5 bg-red-50 text-red-500 rounded-lg focus:ring-2 focus:ring-red-400 p-1.5 hover:bg-red-200 inline-flex items-center justify-center h-8 w-8 dark:bg-gray-800 dark:text-red-400 dark:hover:bg-gray-700" data-dismiss-target="#alert-<?= $index ?>" aria-label="Close">

@@ -14,6 +14,10 @@ try {
     $nis = $_POST['inSiswa'];
     $mpl = $_POST['inMapel'];
 
+    if ($_POST['inSiswa'] == 'x' || $_POST['inMapel'] == 'x') {
+      throw new Exception("Harap masukkan data");
+    }
+
     $qr = "SELECT * FROM nilai WHERE nis_siswa = '$nis' AND kd_mapel = '$mpl'";
 
     $row = $connection->query($qr);
@@ -60,11 +64,11 @@ try {
 
 ?>
 
-<section class="container -mt-7 mx-auto bg-white dark:bg-gray-900 mb-14 relative z-10">
+<section class="container -mt-6 mx-auto bg-white dark:bg-gray-900 mb-14 relative z-10">
   <div class="flex-row items-center justify-between p-4 space-y-3 rounded-ss-lg dark:bg-gray-800 sm:flex sm:space-y-0 sm:space-x-4 sticky top-20 shadow-2xl w-full">
     <div>
-      <h4 class="mr-3 text-2xl font-semibold dark:text-white">Semua data</h4>
-      <p class="mt-1 text-sm font-normal text-gray-500 dark:text-gray-400"><?= $byk ?? "Silahkan <span class=\"underline hover:no-underline cursor-pointer\" onclick=\"window.location.href = 'http://ev.final.test/?v=nilai'\">Refresh</span>" ?></p>
+      <h4 class="mr-3 text-2xl font-semibold dark:text-white font-heading leading-tight">Semua data</h4>
+      <p class="mt-1 text-sm font-normal font-subHeading text-gray-500 dark:text-gray-400"><?= $byk ?? "Silahkan <span class=\"underline hover:no-underline cursor-pointer\" onclick=\"window.location.href = 'http://ev.final.test/?v=nilai'\">Refresh</span>" ?></p>
     </div>
     <div class="flex items-center justify-between pb-4">
 
@@ -96,7 +100,7 @@ try {
             <select id="siswa" name="inSiswa" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
               <option value="x">Siswa...</option>
               <?php
-              $datasMapel = Helper::getMapels('siswas');
+              $datasMapel = Helper::get('siswas', ['kolom' => 'nama_lengkap']);
 
               foreach ($datasMapel as $data) :
                 // if ($selected === $data['nis']) :
@@ -110,7 +114,7 @@ try {
             <select id="mapel" name="inMapel" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
               <option value="x">Pelajaran...</option>
               <?php
-              $datasMapel = Helper::getMapels('mapel');
+              $datasMapel = Helper::get('mapel');
 
               foreach ($datasMapel as $data) :
                 // if ($selected === $data['kode_mapel']) :
@@ -136,7 +140,7 @@ try {
             <select id="mapel" name="mapel" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
               <option value="x">Pelajaran...</option>
               <?php
-              $datasMapel = Helper::getMapels('mapel');
+              $datasMapel = Helper::get('mapel');
 
               foreach ($datasMapel as $data) :
                 if ($selected === $data['kode_mapel']) :
@@ -242,7 +246,7 @@ try {
                 <?= $data->grade ?? '-'; ?>
               </td>
               <td class="px-6 py-4 text-right inline-flex">
-                <a href="?v=nilai&i=<?= $data->nis_siswa; ?>&m=edit" class="text-white capitalize bg-[#404eed] hover:bg-blue-800/95 focus:ring-2 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center mr-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                <a href="?v=nilai&i=<?= $data->nis_siswa; ?>&m=edit&r=<?= $data->kd_nilai ?>" class="text-white capitalize bg-[#404eed] hover:bg-blue-800/95 focus:ring-2 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center mr-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                   <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5 mr-2 -ml-1" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                     <path d="M8 9a3 3 0 100-6 3 3 0 000 6zM8 11a6 6 0 016 6H2a6 6 0 016-6zM16 7a1 1 0 10-2 0v1h-1a1 1 0 100 2h1v1a1 1 0 102 0v-1h1a1 1 0 100-2h-1V7z"></path>
                   </svg>

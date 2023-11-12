@@ -27,8 +27,8 @@ try {
 <section class="bg-white dark:bg-gray-900 mt-14">
   <div class="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 text-center">
     <div class="bg-gradient-to-b dark:from-gray-800 to-transparent dark:border-gray-700 rounded-t-lg p-8 md:py-14 mb-7">
-      <h1 class="text-gray-900 dark:text-white text-3xl md:text-5xl font-extrabold mb-2">halaman guru</h1>
-      <p class="text-lg font-normal text-gray-500 mb-2">smua guru.</p>
+      <h1 class="text-gray-900 dark:text-white text-3xl md:text-5xl font-heading font-extrabold mb-2">halaman guru</h1>
+      <p class="text-lg font-normal text-gray-500 mb-2 font-subHeading"><?= ($datas->num_rows == 0) ? 'Tidak ada data guru' : 'semua guru yg kedaftar.' ?></p>
 
       <div class="inline-flex rounded-md mt-5 shadow-sm" role="group">
         <button type="button" class="inline-flex items-center px-4 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-l-lg hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-500 dark:focus:text-white">
@@ -54,8 +54,8 @@ try {
           <div class="flex items-center space-x-3 max-w-full grow ml-3">
             <img class="w-16 h-16 rounded-full shadow-lg" src="https://placehold.co/300x300/000000/FFFFFF.webp?text=<?= mb_strtoupper(mb_substr($data->nama_guru, 0, 1, "UTF-8")) ?>" alt="<?= $data->nama_guru; ?>">
             <div class="min-w-0 py-5 pl-2">
-              <a href="siswa/guru.php?n=<?= $data->kode_guru ?>" class="text-slate-900 font-medium cursor-pointer hover:underline hover:underline-offset-2 text-sm sm:text-lg truncate dark:text-slate-200"><?= str_replace('.', ' ', ucfirst($data->nama_guru)) ?></a>
-              <div class="text-slate-500 font-medium text-sm sm:text-base leading-tight truncate dark:text-slate-400"><?= $data->pendidikan ?></div>
+              <a href="/guru/guru.php?n=<?= $data->nama_guru ?>&id=<?= $data->kode_guru ?>" class="text-slate-900 font-subHeading font-medium cursor-pointer hover:underline hover:underline-offset-2 text-sm sm:text-lg truncate dark:text-slate-200"><?= str_replace('.', ' ', ucfirst($data->nama_guru)) ?></a>
+              <div class="text-slate-500 font-medium text-sm sm:text-base leading-tight truncate dark:text-slate-400 font-txt"><?= $data->pendidikan ?></div>
             </div>
           </div>
           <div style="margin-right: 1.5rem !important">
@@ -100,7 +100,7 @@ try {
               <!-- Modal body -->
               <div class="p-6 text-left">
                 <p class="text-base leading-relaxed text-gray-500 dark:text-gray-300">
-                  <b class="capitalize"><?= $data->nama_guru; ?></b> bakal adios, Anda yakin?
+                  Guru <b class="capitalize"><?= str_replace('.', ' ', ucfirst($data->nama_guru)) ?></b> bakal adios, Anda yakin?
                 </p>
               </div>
               <!-- Modal footer -->

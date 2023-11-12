@@ -12,11 +12,11 @@ if (isset($_POST['k'])) {
   
   if (!$datas) {
     $_SESSION['info'] = "Mapel gagal dihapus";
-    header('Location: http://ev.final.eva/?v=mapel');
+    header('Location: http://ev.final.test/?v=mapel');
     exit;
   }
 
   $_SESSION['info'] = "Mapel berhasil dihapus";
-  header('Location: http://ev.final.eva/?v=mapel');
+  header('Location: http://ev.final.test/?v=mapel');
   exit;
 }
