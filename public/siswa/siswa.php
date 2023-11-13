@@ -2,6 +2,8 @@
 session_start();
 
 require_once '../../config/database.php';
+require_once '../../utils/constant.php';
+require_once '../../utils/Helper.php';
 
 try {
   if (!isset($_GET['id']) && empty($_GET['id'])) {
@@ -50,7 +52,7 @@ try {
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script src="https://cdn.tailwindcss.com"></script>
   <!-- <link href="../client/css/style.css" rel="stylesheet"> -->
-  <title><?= str_replace('.', ' ', ucfirst($data->nama_lengkap)) . ' / ' . $data->jurusan ?></title>
+  <title><?= Helper::username($data->nama_lengkap) . ' / ' . $data->jurusan ?></title>
   <script>
     tailwind.config = {
       darkMode: 'class',
@@ -66,7 +68,7 @@ try {
   <section class="bg-[#404eed] dark:bg-gray-900 isolate relative max-w-full pt-36 pb-40">
     <div class="container min-h-0 uppercase mx-auto">
       <div class="min-h-[80px] text-center max-w-[1480px]">
-        <h1 class="text-4xl sm:text-6xl font-extrabold text-white tracking-tight mt-3"><?= str_replace('.', ' ', ucfirst($data->nama_lengkap)) ?></h1>
+        <h1 class="text-4xl sm:text-6xl font-extrabold text-white tracking-tight mt-3"><?= Helper::username($data->nama_lengkap) ?></h1>
         <div class="max-w-xl capitalize mx-auto mt-5 sm:mt-7 text-base font-inital text-gray-100">Aplikasi dalam pengembangan dalam rangka pembuatan <span class="font-semibold">CRUD</span> system</div>
       </div>
     </div>
@@ -99,10 +101,10 @@ try {
       <div class="flex-row items-center justify-between p-4 space-y-3 sm:flex sm:space-y-0 sm:space-x-4">
         <div class="flex items-center">
           <div class="w-20 h-20 rounded-full overflow-hidden">
-            <img class="w-full object-cover rounded-full" src="https://placehold.co/300x300/000000/FFFFFF.webp?text=<?= mb_strtoupper(mb_substr($data->nama_lengkap, 0, 1, "UTF-8")) ?>" alt="<?= str_replace('.', ' ', ucfirst($data->nama_lengkap)) ?>">
+            <img class="w-full object-cover rounded-full" src="https://placehold.co/300x300/000000/FFFFFF.webp?text=<?= mb_strtoupper(mb_substr($data->nama_lengkap, 0, 1, "UTF-8")) ?>" alt="<?= Helper::username($data->nama_lengkap) ?>">
           </div>
           <div class="ml-4">
-            <h2 class="text-lg font-semibold dark:text-gray-100"><?= str_replace('.', ' ', ucfirst($data->nama_lengkap)) ?></h2>
+            <h2 class="text-lg font-semibold dark:text-gray-100"><?= Helper::username($data->nama_lengkap) ?></h2>
             <p class="text-gray-600 dark:text-gray-300"><?= $data->jurusan; ?></p>
           </div>
         </div>

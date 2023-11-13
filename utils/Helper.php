@@ -180,31 +180,73 @@ class Helper
 
   public static function get(string $table, array $options = []): mysqli_result
   {
-    $query = "SELECT * from $table";
-    if (!empty($options)) {
-      // if (isset($options['kolom'])) {
-      //   if (count($options['kolom']) > 0) {
-      //     $kolom = implode(', ', $options['kolom']);
-      //   }
-      //   $query = "SELECT $kolom FROM $table";
-      // }
-      if (isset($options['kolom'])) {
-        $query = "SELECT " . $options['kolom'] . " from $table";
-        $query .= " ORDER BY $table." . $options['kolom'];
-        if (isset($options['order']) && in_array(strtolower($options['order']), ['asc', 'desc'])) {
-          $query .= " " . strtoupper($options['order']);
-        }
-        if (isset($options['operator'])) {
-          $query = "SELECT " . $options['operator'] . "(" . $options['kolom'] . ") FROM $table";
-        }
-      }
+    $query = "SELECT ";
 
-      // if (isset($options['where'])) {
-      //     $query .= " WHERE " . $options['where'];
-      // }
+    if (isset($options['kolom'])) {
+      if (is_array($options['kolom']) && count($options['kolom']) > 0) {
+        $query .= implode(',', $options['kolom']);
+      } else {
+        $query .= $options['kolom']; //single kolom
+      }
+    } else {
+      $query .= "*"; //ga ada kolom
     }
+
+    $query .= " FROM $table";
+
+    if (isset($options['order']) && in_array(strtolower($options['order']), ['asc', 'desc'])) {
+        $query .= " ORDER BY $table." . $options['kolom'] . " " . strtoupper($options['order']);
+    }
+
+    if (isset($options['operator']) && isset($options['kolom'])) {
+      $query = "SELECT " . $options['operator'] . "(" . $options['kolom'] . ") FROM $table";
+    }
+
+    // if (isset($options['where'])) {
+    //     $query .= " WHERE " . $options['where'];
+    // }
+
     $connection = connect();
     return $connection->query($query);
+  }
+
+  public static function username(?string $username): ?string
+  {
+    if (is_null($username)) {
+      return '~';
+    }
+    return str_replace('.', ' ', ucfirst($username));
+  }
+
+  public static function grade(float|int $nilai): string
+  {
+    if ($nilai >= 97) {
+      return 'A+';
+    } elseif ($nilai >= 93) {
+      return 'A';
+    } elseif ($nilai >= 90) {
+      return 'A-';
+    } elseif ($nilai >= 87) {
+      return 'B+';
+    } elseif ($nilai >= 83) {
+      return 'B';
+    } elseif ($nilai >= 80) {
+      return 'B-';
+    } elseif ($nilai >= 77) {
+      return 'C+';
+    } elseif ($nilai >= 73) {
+      return 'C';
+    } elseif ($nilai >= 70) {
+      return 'C-';
+    } elseif ($nilai >= 67) {
+      return 'D+';
+    } elseif ($nilai >= 63) {
+      return 'D';
+    } elseif ($nilai >= 60) {
+      return 'D-';
+    } else {
+      return 'F';
+    }
   }
 
   /**

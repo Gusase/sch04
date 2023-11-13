@@ -1,9 +1,9 @@
 <?php
 require_once __DIR__ . '/../../../utils/Helper.php';
 
-$connection = connect();
-
 $id = (isset($_GET['n'])) ? $_GET['n'] : die('Unauthorized');
+
+$connection = connect();
 
 $query = "SELECT * FROM siswas where siswas.nama_lengkap = '$id'";
 

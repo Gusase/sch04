@@ -1988,8 +1988,16 @@ video {
   text-decoration-line: underline;
 }
 
+.line-through{
+  text-decoration-line: line-through;
+}
+
 .decoration-gray-500{
   text-decoration-color: #6b7280;
+}
+
+.decoration-sky-500{
+  text-decoration-color: #0ea5e9;
 }
 
 .underline-offset-2{
@@ -2011,10 +2019,6 @@ video {
 
 .opacity-\[0\.4\]{
   opacity: 0.4;
-}
-
-.opacity-10{
-  opacity: 0.1;
 }
 
 .shadow{
@@ -2128,6 +2132,10 @@ video {
   transition-duration: 300ms;
 }
 
+.duration-100{
+  transition-duration: 100ms;
+}
+
 .ease-out{
   transition-timing-function: cubic-bezier(0, 0, 0.2, 1);
 }
@@ -2211,6 +2219,16 @@ video {
 .hover\:text-gray-900:hover{
   --tw-text-opacity: 1;
   color: rgb(17 24 39 / var(--tw-text-opacity));
+}
+
+.hover\:text-white:hover{
+  --tw-text-opacity: 1;
+  color: rgb(255 255 255 / var(--tw-text-opacity));
+}
+
+.hover\:text-black:hover{
+  --tw-text-opacity: 1;
+  color: rgb(0 0 0 / var(--tw-text-opacity));
 }
 
 .hover\:underline:hover{
@@ -2614,6 +2632,10 @@ video {
 :is(.dark .dark\:text-white){
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity));
+}
+
+:is(.dark .dark\:decoration-sky-500){
+  text-decoration-color: #0ea5e9;
 }
 
 :is(.dark .dark\:placeholder-gray-400)::-moz-placeholder{

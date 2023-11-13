@@ -54,7 +54,7 @@ try {
           <div class="flex items-center space-x-3 max-w-full grow ml-3">
             <img class="w-16 h-16 rounded-full shadow-lg" src="https://placehold.co/300x300/000000/FFFFFF.webp?text=<?= mb_strtoupper(mb_substr($data->nama_guru, 0, 1, "UTF-8")) ?>" alt="<?= $data->nama_guru; ?>">
             <div class="min-w-0 py-5 pl-2">
-              <a href="/guru/guru.php?n=<?= $data->nama_guru ?>&id=<?= $data->kode_guru ?>" class="text-slate-900 font-subHeading font-medium cursor-pointer hover:underline hover:underline-offset-2 text-sm sm:text-lg truncate dark:text-slate-200"><?= str_replace('.', ' ', ucfirst($data->nama_guru)) ?></a>
+              <a href="/guru/guru.php?n=<?= $data->nama_guru ?>&id=<?= $data->kode_guru ?>" class="text-slate-900 font-subHeading font-medium cursor-pointer hover:underline hover:underline-offset-2 text-sm sm:text-lg truncate dark:text-slate-200"><?= Helper::username($data->nama_guru) ?></a>
               <div class="text-slate-500 font-medium text-sm sm:text-base leading-tight truncate dark:text-slate-400 font-txt"><?= $data->pendidikan ?></div>
             </div>
           </div>
@@ -100,7 +100,7 @@ try {
               <!-- Modal body -->
               <div class="p-6 text-left">
                 <p class="text-base leading-relaxed text-gray-500 dark:text-gray-300">
-                  Guru <b class="capitalize"><?= str_replace('.', ' ', ucfirst($data->nama_guru)) ?></b> bakal adios, Anda yakin?
+                  Guru <b class="capitalize"><?= Helper::username($data->nama_guru) ?></b> bakal adios, Anda yakin?
                 </p>
               </div>
               <!-- Modal footer -->

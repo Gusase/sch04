@@ -106,7 +106,7 @@ try {
                     <!-- Modal body -->
                     <div class="p-6 text-left">
                       <p class="text-base leading-relaxed text-gray-500 dark:text-gray-300">
-                        Kamu akan menhapus kelas <b class="capitalize"><?= $data->nama; ?></b> dari database, Anda yakin?
+                        Hapus kelas <b class="capitalize"><?= $data->nama; ?></b> dari database, Anda yakin?
                       </p>
                     </div>
                     <!-- Modal footer -->

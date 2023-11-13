@@ -8,7 +8,7 @@ try {
     );
   }
 
-  $query = "SELECT * from mapel ORDER BY nama_mapel ASC";
+  $query = "SELECT m.*,g.nama_guru AS guru FROM mapel m LEFT JOIN gurus g ON m.kode_guru = g.kode_guru ORDER BY m.nama_mapel ASC";
 
   $datas = $connection->query($query);
   $byk = mysqli_num_rows($datas);
@@ -45,14 +45,17 @@ try {
           <th scope="col" class="px-6 py-3">
             no
           </th>
-          <th scope="col" class="px-6 py-3 w-1/3">
+          <th scope="col" class="px-6 py-3 w-1/6">
             kode mapel
           </th>
           <th scope="col" class="px-6 py-3 w-1/3">
             nama mapel
           </th>
-          <th scope="col" class="px-6 py-3 w-full">
+          <th scope="col" class="px-6 py-3 w-1/6">
             jam pelajaran
+          </th>
+          <th scope="col" class="px-6 py-3 w-full">
+            guru
           </th>
           <th scope="col" class="px-6 py-3">
             <span class="sr-only">Action</span>
@@ -74,6 +77,9 @@ try {
             </td>
             <td class="px-6 py-4">
               <?= $data->jp; ?>
+            </td>
+            <td class="px-6 py-4">
+              <?= Helper::username($data->guru) ?? '~' ?>
             </td>
             <td class="px-6 py-4 text-right inline-flex">
               <a href="?v=mapel&i=<?= $data->kode_mapel; ?>&m=edit" class="text-white capitalize bg-[#404eed] hover:bg-blue-800/95 focus:ring-2 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center mr-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">

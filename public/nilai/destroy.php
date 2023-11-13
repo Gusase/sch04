@@ -8,10 +8,10 @@ if (isset($_POST['k'])) {
   $id = $_POST['k'];
   $query = "DELETE FROM nilai WHERE nilai.kd_nilai = '$id'";
 
-  $datas = mysqli_query($connection, $query);
+  $datas = $connection->query($query);
 
   if (!$datas) {
-    $_SESSION['info'] = "nilai gagal dihapus";
+    $_SESSION['info'] = "Nilai gagal dihapus";
     header('Location: http://ev.final.test/?v=nilai');
     exit;
   }

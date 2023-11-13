@@ -5,6 +5,7 @@ require_once __DIR__ . '/../vendor/autoload.php';
 require_once __DIR__ .  '/../config/database.php';
 require_once __DIR__ .  '/../utils/redirect.php';
 require_once __DIR__ . '/../utils/Helper.php';
+require_once __DIR__ . '/../utils/constant.php';
 
 if (isset($_SESSION['errors'])) {
   $errors = $_SESSION['errors'];
@@ -131,7 +132,7 @@ $page = redirect($v);
      * Modal box 
      */
     if ($url) : ?>
-      <div id="authentication-modal" tabindex="-1" aria-hidden="true" class="hidden fixed bg-black/10 backdrop-blur-sm top-0 left-0 right-0 z-50 w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] min-h-screen duration-200 justify-center items-center flex">
+      <div id="authentication-modal" tabindex="-1" aria-hidden="true" class="hidden fixed bg-black/10 backdrop-blur-sm top-0 left-0 right-0 z-50 w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] min-h-screen duration-200 justify-center items-center">
         <?php
         $pagg = match ($_GET['v']) {
           'siswa' => 'component/siswa/form.php',

@@ -1,5 +1,6 @@
 <?php
 require_once __DIR__ . '/../../../config/database.php';
+require_once __DIR__ . '/../../../utils/Helper.php';
 
 if (!isset($_GET['i'])) {
   die("TIDAK MEMILIKI HAK AKSES");
@@ -50,11 +51,11 @@ if (!$hasil) {
           <h1><b>SMK TARUNA BANGSA</b></h1>
         </div>
       </div>
-      <table class="mt-12 border-collapse w-1/3">
+      <table class="mt-12  border-collapse w-1/3">
         <tr>
           <td>Nama</td>
           <td>:</td>
-          <td><?= str_replace('.', ' ', ucfirst($row->nama_siswa)) ?></td>
+          <td><?= Helper::username($row->nama_siswa) ?></td>
         </tr>
         <tr>
           <td>Nis</td>
@@ -98,20 +99,20 @@ if (!$hasil) {
 
                 <td class="border border-slate-900 px-2.5 py-2">
                   <?= $row->nama_mapel ?>
-                  <span class="text-gray-700 block"><?= str_replace('.', '', ucfirst($row->nama_guru)) ?></span>
+                  <span class="text-gray-700 block"><?= Helper::username($row->nama_guru) ?></span>
                 </td>
 
                 <td class="border border-slate-900 px-2.5 py-2 text-center">
-                  <?= $row->nilai_akhir;
+                  <?= $row->nilai_akhir ?? '?';
                   $jumlah += $row->nilai_akhir ?>
                 </td>
 
                 <td class="border border-slate-900 px-2.5 py-2 text-center">
-                  <?= $row->grade ?>
+                  <?= $row->grade ?? '?'?>
                 </td>
               </tr>
           <?php
-              $walas = str_replace('.', ' ', ucfirst($row->nama_walas));
+              $walas = Helper::username($row->nama_walas);
             endwhile;
           endif;
           ?>

@@ -13,25 +13,19 @@ $data = $datas->fetch_object();
 <div class="py-8 px-4 mx-auto max-w-screen-lg text-left lg:py-16">
   <!-- Modal content -->
   <div class="relative bg-white rounded-lg shadow-2xl dark:bg-gray-700">
-    <form action="siswa/edit.php" method="post">
+    <form action="guru/edit.php" method="post">
       <input type="hidden" name="kode" value="<?= $data->kode_guru; ?>">
       <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
         <div class="px-6 py-6 lg:px-8 space-y-4">
-          <h3 class="mb-4 text-xl md:text-2xl font-medium text-gray-900 dark:text-white"><?= $data->nama_guru; ?> Data</h3>
+          <h3 class="mb-4 text-xl md:text-2xl font-medium text-gray-900 dark:text-white">Edit guru <?= Helper::username($data->nama_guru); ?></h3>
           <div class="space-y-3">
             <div>
-              <label class="capitalize block mb-2 mt-3 text-sm font-medium text-gray-900 dark:text-white">kode <?= $data->nama_guru ?></label>
-              <!-- <div class="bg-gray-50 select-none border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white">
-                <?= $data->kode_guru; ?>
-              </div> -->
+              <label class="capitalize block mb-2 mt-3 text-sm font-medium text-gray-900 dark:text-white">kode guru</label>
               <input type="text" name="kode_guru" id="nama" placeholder="~" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" fdprocessedid="ju39cs" value="<?= $data->kode_guru ?>">
             </div>
             <div>
               <label class="capitalize block mb-2 mt-3 text-sm font-medium text-gray-900 dark:text-white">nama</label>
               <input type="text" name="nama" id="nama" placeholder="~" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" fdprocessedid="ju39cs" value="<?= $data->nama_guru ?>">
-              <!-- <div class="bg-gray-50 select-none border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white">
-                <?= $data->nama_guru; ?>
-              </div> -->
             </div>
             <div>
               <label for="pendidikan" class="capitalize block mb-2 mt-3 text-sm font-medium text-gray-900 dark:text-white">pendidikan</label>

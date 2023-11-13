@@ -100,12 +100,12 @@ try {
             <select id="siswa" name="inSiswa" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
               <option value="x">Siswa...</option>
               <?php
-              $datasMapel = Helper::get('siswas', ['kolom' => 'nama_lengkap']);
+              $datasMapel = Helper::get('siswas', ['kolom' => ['nama_lengkap','nis']]);
 
               foreach ($datasMapel as $data) :
                 // if ($selected === $data['nis']) :
               ?>
-                <option value="<?= $data['nis'] ?>"><?= str_replace('.', ' ', ucfirst($data['nama_lengkap'])) ?></option>
+                <option value="<?= $data['nis'] ?>"><?= Helper::username($data['nama_lengkap']) ?></option>
               <?php endforeach; ?>
             </select>
           </li>
@@ -216,7 +216,7 @@ try {
                 <?= $data->nis_siswa; ?>
               </td>
               <td class="px-6 py-4">
-                <?= str_replace('.', ' ', ucfirst($data->nama_lengkap)) ?>
+                <?= Helper::username($data->nama_lengkap) ?>
               </td>
               <td class="px-6 py-4">
                 <?= $data->nama ?? '-' ?>
@@ -254,7 +254,7 @@ try {
                 </a>
                 <form action="nilai/destroy.php" method="post">
                   <input type="hidden" name="k" value="<?= $data->kd_nilai; ?>">
-                  <button type="submit" onclick="return confirm('Hapus <?= str_replace('.', ' ', ucfirst($data->nama_lengkap)) ?>')" class="text-white capitalize bg-[#404eed] hover:bg-blue-800/95 focus:ring-2 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center mr-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">
+                  <button type="submit" onclick="return confirm('Hapus <?= Helper::username($data->nama_lengkap) ?>')" class="text-white capitalize bg-[#404eed] hover:bg-blue-800/95 focus:ring-2 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center mr-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">
                     <svg class="h-3.5 w-3.5 mr-2 -ml-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 20">
                       <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h16M7 8v8m4-8v8M7 1h4a1 1 0 0 1 1 1v3H6V2a1 1 0 0 1 1-1ZM3 5h12v13a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V5Z" />
                     </svg>

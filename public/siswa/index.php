@@ -8,6 +8,7 @@ try {
   }
 
   [$heading, $selectedKelas] = null;
+  $listsKelas = ["RPL 1", "RPL 2", "RPL 3", "TKJ 1", "TKJ 2", "TKJ 3", "TAV 1", "TAV 2", "TAV 3", "TPB 1", "TPB 2", "TPB 3", "TGB 1", "TGB 2", "TGB 3", "TITL 1", "TITL 2", "TITL 3", "OA 1", "OA 2", "OA 3"];
   $query = "SELECT s.nama_lengkap,s.jurusan,s.nis,k.nama AS nama_kelas from siswas s JOIN kelas k ON k.id = s.id_kelas ORDER BY nama_lengkap ASC";
 
   if (isset($_GET['kelas']) && $_GET['kelas'] != 'all') {
@@ -18,18 +19,24 @@ try {
 
     $nmKls = explode('|', str_replace('_', ' ', $_GET['kelas']));
     $kls = implode('\',\'', $nmKls);
-    $heading = 'Siswa ' . implode(' , ', $nmKls);
     $selectedKelas = explode(',', str_replace('\'', '', $kls)); //ribet nya array
 
-    if (!in_array($nmKls[0], ["RPL 1", "RPL 2", "RPL 3", "TKJ 1", "TKJ 2", "TKJ 3", "TAV 1", "TAV 2", "TAV 3", "TPB 1", "TPB 2", "TPB 3", "TGB 1", "TGB 2", "TGB 3", "TITL 1", "TITL 2", "TITL 3", "OA 1", "OA 2", "OA 3"])) {
+    if (!in_array($nmKls[0], $listsKelas) && count($nmKls) < 2) {
       $heading = 'Kelas \'' . implode(' , ', $nmKls) . '\' tidak ada';
     }
 
     $query = "SELECT s.nama_lengkap,s.jurusan,s.nis,k.nama AS nama_kelas from siswas s JOIN kelas k ON k.id = s.id_kelas WHERE k.nama IN('{$kls}') ORDER BY k.nama ASC";
+
+    foreach ($nmKls as $index => $klz) {
+      if (!in_array($klz, $listsKelas)) {
+        $nmKls[$index] = "<span class='line-through dark:text-gray-400 dark:decoration-sky-500 dark:hover:text-white text-gray-500 hover:text-black duration-150' title='Kelas $klz tidak ada'>$klz</span>"; //lah iya pas dicek sebelumnya aj indexnya sama
+      }
+    }
+    $heading = 'Siswa ' . implode(' , ', $nmKls);
   }
 
   $datas = $connection->query($query);
-  $datasKelas = Helper::get('kelas', ['kolom' => 'nama']);
+  $datasKelas = Helper::get('kelas', ['kolom' => 'nama', 'order' => 'asc']);
 
   if (!$datas) {
     throw new Exception("Error to get data");
@@ -76,7 +83,7 @@ try {
           <div class="flex items-center space-x-3 max-w-full grow ml-3">
             <img class="w-16 h-16 rounded-full shadow-lg" src="https://placehold.co/300x300/000000/FFFFFF.webp?text=<?= mb_strtoupper(mb_substr($data->nama_lengkap, 0, 1, "UTF-8")) ?>" alt="<?= $data->nama_lengkap; ?>">
             <div class="min-w-0 py-5 pl-2">
-              <a href="siswa/siswa.php?n=<?= strtolower(urlencode($data->nama_lengkap)) ?>&id=<?= $data->nis ?>" class="text-slate-900 font-subHeading font-medium cursor-pointer hover:underline hover:underline-offset-2 text-sm sm:text-lg truncate dark:text-slate-200"><?= str_replace('.', ' ', ucfirst($data->nama_lengkap)) ?></a><small class="dark:text-slate-200 text-slate-600 ml-1">#<a class="underline underline-offset-2 hover:decoration-2 decoration-gray-500" href="?v=siswa&kelas=<?= str_replace(' ', '_', $data->nama_kelas) ?>"><?= $data->nama_kelas ?></a></small>
+              <a href="siswa/siswa.php?n=<?= strtolower(urlencode($data->nama_lengkap)) ?>&id=<?= $data->nis ?>" class="text-slate-900 font-subHeading font-medium cursor-pointer hover:underline hover:underline-offset-2 text-sm sm:text-lg truncate dark:text-slate-200"><?= Helper::username($data->nama_lengkap) ?></a><small class="dark:text-slate-200 text-slate-600 ml-1">#<a class="underline underline-offset-2 hover:decoration-2 decoration-gray-500" href="?v=siswa&kelas=<?= str_replace(' ', '_', $data->nama_kelas) ?>"><?= $data->nama_kelas ?></a></small>
               <div class="text-slate-500 font-txt font-medium text-sm sm:text-base leading-tight truncate dark:text-slate-400"><?= $data->jurusan ?></div>
             </div>
           </div>
@@ -122,7 +129,7 @@ try {
               <!-- Modal body -->
               <div class="p-6 text-left">
                 <p class="text-base leading-relaxed text-gray-500 dark:text-gray-300">
-                  <b class="capitalize"><?= $data->nama_lengkap; ?></b> bakal adios, Anda yakin?
+                  <b class="capitalize"><?= Helper::username($data->nama_lengkap); ?></b> bakal adios, Anda yakin?
                 </p>
               </div>
               <!-- Modal footer -->
@@ -160,7 +167,7 @@ try {
         </div>
         <!-- Modal body -->
         <div class="p-4 md:p-8 md:pb-3">
-          <form action="https://ev.final.test/?v=siswa" method="get">
+          <form action="<?= HOME ?>?v=siswa" method="get">
             <ul class="mb-4 md:-mt-3 gap-4 justify-center flex flex-wrap -mx-7">
               <?php $i = 0;
               while ($dataKelas = $datasKelas->fetch_object()) : $i++ ?>
@@ -200,7 +207,7 @@ try {
 
     if (!(kelas.length > 0 && kelas.length < cbKelas.length)) {
       btn.classList.add('cursor-not-allowed');
-    }else{
+    } else {
       btn.classList.remove('cursor-not-allowed');
     }
 
