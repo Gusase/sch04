@@ -43,6 +43,13 @@ function redirect($url)
         'page' => 'component/nilai/formEdit.php'
       ];
     }
+    if (isset($_GET['m']) && $_GET['m'] == 'tertinggi') {
+      return [
+        't' => 'Semua nilai | Tertinggi',
+        'head' => 'Nilai tertinggi',
+        'page' => 'component/nilai/nilaiTertinggi.php'
+      ];
+    }
     return [
       't' => 'Semua Nilai',
       'head' => '(⊙_⊙;)',

@@ -1,7 +1,8 @@
 <nav class="sticky top-0 font-subHeading z-40 w-full backdrop-blur-sm duration-300 transition-all lg:border-b lg:border-slate-900/10 dark:border-slate-50/[0.06] bg-white/80 dark:bg-slate-900/90">
   <div class="max-w-screen-lg flex flex-wrap items-center justify-between mx-auto p-4">
     <a href="" class="flex items-center justify-center space-x-3">
-      <img src="https://avatars.githubusercontent.com/u/112738383?v=4" class="aspect-square w-7 rounded-full object-cover" alt="">
+      <img src="http://localhost/final/src/img/sss.gif" class="aspect-square w-7 rounded-full object-cover" alt="">
+      <!-- <img src="https://avatars.githubusercontent.com/u/112738383?v=4" class="aspect-square w-7 rounded-full object-cover" alt=""> -->
       <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Ev</span>
     </a>
     <button data-collapse-toggle="navbar-default" type="button" class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="navbar-default" aria-expanded="false">
@@ -31,10 +32,29 @@
           <a href="<?= HOME ?>?v=nilai" class="block py-2 pl-3 pr-4 text-gray-900 bg-gray-100 hover:underline hover:underline-offset-2 rounded md:bg-transparent dark:hover:decoration-sky-600 hover:text-blue-700 md:p-0 dark:text-white">Nilai</a>
         </li>
         <li>
-          <a href="<?= HOME ?>?v=raport" class="block py-2 pl-3 pr-4 text-gray-900 bg-gray-100 hover:underline hover:underline-offset-2 rounded md:bg-transparent dark:hover:decoration-sky-600 hover:text-blue-700 md:p-0 dark:text-white">Raport</a>
+          <button id="dropdownNavbarLink" data-dropdown-toggle="animTop" data-dropdown-trigger="" class="inline-flex items-center py-2 pl-3 pr-4 text-gray-900 bg-gray-100 hover:underline hover:underline-offset-2 rounded md:bg-transparent dark:hover:decoration-sky-600 hover:text-blue-700 md:p-0 dark:text-white">Laporan
+            <svg class="ml-2 h-2.5 w-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4" />
+            </svg></button>
+        </li>
+        <li>
+          <div id="animTop" class="z-50 mt-1 hidden w-full border-y border-gray-200 bg-gray-50 shadow-sm dark:border-gray-600 dark:bg-gray-800 max-md:!inset-auto max-md:!transform-none md:w-auto md:bg-white md:shadow-xl">
+            <ul class="mx-auto grid gap-1 px-4 py-5 text-gray-900 dark:text-white sm:grid-cols-2 md:max-w-screen-2xl md:px-6">
+              <li>
+                <a href="<?= HOME ?>?v=raport" class="block py-2 pl-3 pr-4 text-gray-900 bg-gray-100 hover:underline hover:underline-offset-2 rounded md:bg-transparent dark:hover:decoration-sky-600 hover:text-blue-700 md:p-0 dark:text-white">
+                  <div class="font-semibold text-white">Raport</div>
+                </a>
+              </li>
+              <li>
+                <a href="<?= HOME ?>?v=nilai&m=tertinggi" class="block py-2 pl-3 pr-4 text-gray-900 bg-gray-100 hover:underline hover:underline-offset-2 rounded md:bg-transparent dark:hover:decoration-sky-600 hover:text-blue-700 md:p-0 dark:text-white">
+                  <div class="font-semibold text-white">Nilai Tertinggi</div>
+                </a>
+              </li>
+            </ul>
+          </div>
         </li>
         <?php
-        if ($_REQUEST) : ?>
+        if ($_REQUEST && $_REQUEST['v'] != 'raport') : ?>
           <li>
             <div class="inline-flex">
               <button type="button" data-dropdown-toggle="language-dropdown-menu" class="inline-flex items-center font-medium space-x-3 px-4 py-3 border border-gray-500 rounded-lg cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white">

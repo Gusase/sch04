@@ -99,7 +99,7 @@ if (!$hasil) {
 
                 <td class="border border-slate-900 px-2.5 py-2">
                   <?= $row->nama_mapel ?>
-                  <span class="text-gray-700 block"><?= Helper::username($row->nama_guru) ?></span>
+                  <span class="text-gray-700 block">Guru: <?= Helper::username($row->nama_guru) ?></span>
                 </td>
 
                 <td class="border border-slate-900 px-2.5 py-2 text-center">
@@ -108,7 +108,7 @@ if (!$hasil) {
                 </td>
 
                 <td class="border border-slate-900 px-2.5 py-2 text-center">
-                  <?= $row->grade ?? '?'?>
+                  <?= $row->grade ?? '?' ?>
                 </td>
               </tr>
           <?php

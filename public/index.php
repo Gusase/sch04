@@ -140,6 +140,7 @@ $page = redirect($v);
           'nilai' => 'component/nilai/form.php',
           'guru' => 'component/guru/form.php',
           'kelas' => 'component/kelas/form.php',
+          'raport' => null,
         };
 
         include_once $pagg

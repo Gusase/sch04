@@ -31,12 +31,6 @@ try {
       <h4 class="mr-3 text-2xl font-semibold dark:text-white font-heading">Raport siswa</h4>
       <p class="mt-1 text-sm font-normal text-gray-500 dark:text-gray-400 font-subHeading"><?= $byk > 0 ? "Menampilkan $byk data raport" : 'Tidak ada data raport'; ?></p>
     </div>
-    <button data-modal-target="authentication-modal" id="addsiswa" data-modal-toggle="authentication-modal" class="text-white capitalize bg-[#404eed] hover:bg-blue-800/95 focus:ring-2 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center mr-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-      <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5 mr-2 -ml-1" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-        <path d="M8 9a3 3 0 100-6 3 3 0 000 6zM8 11a6 6 0 016 6H2a6 6 0 016-6zM16 7a1 1 0 10-2 0v1h-1a1 1 0 100 2h1v1a1 1 0 102 0v-1h1a1 1 0 100-2h-1V7z"></path>
-      </svg>
-      tambah mapel
-    </button>
   </div>
   <div class="relative overflow-x-auto shadow-md sm:rounded-bb-lg">
     <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
@@ -70,7 +64,7 @@ try {
               <?= $data->nis; ?>
             </td>
             <td class="px-6 py-4">
-              <?= str_replace('.', ' ', ucfirst($data->nama_siswa)) ?>
+              <?= Helper::username($data->nama_siswa) ?>
             </td>
             <td class="px-6 py-4">
               <?= $data->nama_kelas; ?>
@@ -107,12 +101,12 @@ try {
                     <!-- Modal body -->
                     <div class="p-6 text-left">
                       <p class="text-base leading-relaxed text-gray-500 dark:text-gray-300">
-                        Kamu akan menhapus pelajaran <b class="capitalize"><?= $data->nama_mapel; ?></b>, Anda yakin?
+                        Kamu akan menhapus rapot <b class="capitalize"><?= Helper::username($data->nama_siswa) ?></b>, Anda yakin?
                       </p>
                     </div>
                     <!-- Modal footer -->
                     <div class="flex items-center p-6 space-x-2 border-t border-gray-200 rounded-b dark:border-gray-600">
-                      <form action="mapel/destroy.php" method="post">
+                      <form action="" method="post">
                         <input type="hidden" name="k" value="<?= $data->nis; ?>">
                         <button data-modal-hide="defaultModal-#<?= $data->nis ?>" type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-red-500 dark:hover:bg-red-600 dark:focus:ring-red-800">Ok</button>
                       </form>
