@@ -9,7 +9,7 @@ try {
 
   [$heading, $selectedKelas] = null;
   $listsKelas = ["RPL 1", "RPL 2", "RPL 3", "TKJ 1", "TKJ 2", "TKJ 3", "TAV 1", "TAV 2", "TAV 3", "TPB 1", "TPB 2", "TPB 3", "TGB 1", "TGB 2", "TGB 3", "TITL 1", "TITL 2", "TITL 3", "OA 1", "OA 2", "OA 3"];
-  $query = "SELECT s.nama_lengkap,s.jurusan,s.nis,k.nama AS nama_kelas from siswas s JOIN kelas k ON k.id = s.id_kelas ORDER BY nama_lengkap ASC";
+  $query = "SELECT s.nama_lengkap,s.jurusan,s.nis,k.nama AS nama_kelas from siswas s LEFT JOIN kelas k ON k.id = s.id_kelas ORDER BY nama_lengkap ASC";
 
   if (isset($_GET['kelas']) && $_GET['kelas'] != 'all') {
     // $kls = str_replace('_', ' ', $_GET['kelas']);
@@ -83,7 +83,7 @@ try {
           <div class="flex items-center space-x-3 max-w-full grow ml-3">
             <img class="w-16 h-16 rounded-full shadow-lg" src="https://placehold.co/300x300/000000/FFFFFF.webp?text=<?= mb_strtoupper(mb_substr($data->nama_lengkap, 0, 1, "UTF-8")) ?>" alt="<?= $data->nama_lengkap; ?>">
             <div class="min-w-0 py-5 pl-2">
-              <a href="siswa/siswa.php?n=<?= strtolower(urlencode($data->nama_lengkap)) ?>&id=<?= $data->nis ?>" class="text-slate-900 font-subHeading font-medium cursor-pointer hover:underline hover:underline-offset-2 text-sm sm:text-lg truncate dark:text-slate-200"><?= Helper::username($data->nama_lengkap) ?></a><small class="dark:text-slate-200 text-slate-600 ml-1">#<a class="underline underline-offset-2 hover:decoration-2 decoration-gray-500" href="?v=siswa&kelas=<?= str_replace(' ', '_', $data->nama_kelas) ?>"><?= $data->nama_kelas ?></a></small>
+              <a href="siswa/siswa.php?n=<?= strtolower(urlencode($data->nama_lengkap)) ?>&id=<?= $data->nis ?>" class="text-slate-900 font-subHeading font-medium cursor-pointer hover:underline hover:underline-offset-2 text-sm sm:text-lg truncate dark:text-slate-200"><?= Helper::username($data->nama_lengkap) ?></a><small class="dark:text-slate-200 text-slate-600 ml-1"><a class="underline underline-offset-2 hover:decoration-2 decoration-gray-500" href="?v=siswa&kelas=<?= is_null($data->nama_kelas) ? 'all' : str_replace(' ', '_', $data->nama_kelas) ?>"><?= '#' . $data->nama_kelas ?? null ?></a></small>
               <div class="text-slate-500 font-txt font-medium text-sm sm:text-base leading-tight truncate dark:text-slate-400"><?= $data->jurusan ?></div>
             </div>
           </div>

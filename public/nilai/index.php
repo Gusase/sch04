@@ -65,7 +65,7 @@ try {
 ?>
 
 <section class="container -mt-6 mx-auto bg-white dark:bg-gray-900 mb-14 relative z-10">
-  <div class="flex-row items-center justify-between p-4 space-y-3 rounded-ss-lg dark:bg-gray-800 sm:flex sm:space-y-0 sm:space-x-4 sticky top-20 shadow-2xl w-full">
+  <div class="flex-row items-center justify-between p-4 space-y-3 rounded-ss-lg dark:bg-gray-800 sm:flex sm:space-y-0 sm:space-x-4 shadow-2xl w-full">
     <div>
       <h4 class="mr-3 text-2xl font-semibold dark:text-white font-heading leading-tight">Semua data</h4>
       <p class="mt-1 text-sm font-normal font-subHeading text-gray-500 dark:text-gray-400"><?= $byk ?? "Silahkan <span class=\"underline hover:no-underline cursor-pointer\" onclick=\"window.location.href = 'http://ev.final.test/?v=nilai'\">Refresh</span>" ?></p>
@@ -100,7 +100,7 @@ try {
             <select id="siswa" name="inSiswa" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
               <option value="x">Siswa...</option>
               <?php
-              $datasMapel = Helper::get('siswas', ['kolom' => ['nama_lengkap','nis']]);
+              $datasMapel = Helper::get('siswas', ['kolom' => ['nama_lengkap', 'nis']]);
 
               foreach ($datasMapel as $data) :
                 // if ($selected === $data['nis']) :
@@ -219,7 +219,7 @@ try {
                 <?= Helper::username($data->nama_lengkap) ?>
               </td>
               <td class="px-6 py-4">
-                <?= $data->nama ?? '-' ?>
+                <a class="underline underline-offset-2 hover:decoration-2 decoration-gray-500" href="?v=siswa&kelas=<?= is_null($data->nama) ? 'all' : str_replace(' ', '_', $data->nama) ?>"><?= $data->nama ?? null ?></a>
               </td>
               <td class="px-6 py-4">
                 <?= $data->nama_mapel; ?>

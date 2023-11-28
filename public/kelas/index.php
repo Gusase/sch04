@@ -8,7 +8,7 @@ try {
     );
   }
 
-  $query = "SELECT * from kelas kl LEFT JOIN gurus gr ON gr.kode_guru = kl.kode_guru ORDER BY kl.nama ASC";
+  $query = "SELECT k.*,g.nama_guru,COUNT(s.id_kelas) AS kelas_terisi from kelas k LEFT JOIN gurus g ON g.kode_guru = k.kode_guru LEFT JOIN siswas s ON k.id = s.id_kelas GROUP BY k.nama ORDER BY k.nama ASC;";
 
   $datas = $connection->query($query);
   $byk = mysqli_num_rows($datas);
@@ -50,6 +50,9 @@ try {
           <th scope="col" class="px-6 py-3 w-1/5">
             kapasitas kelas
           </th>
+          <th scope="col" class="px-6 py-3 w-1/5">
+            jumlah siswa
+          </th>
           <th scope="col" class="px-6 py-3 w-full">
             nama guru
           </th>
@@ -70,6 +73,9 @@ try {
             </td>
             <td class="px-6 py-4">
               <?= $data->kapasitas; ?>
+            </td>
+            <td class="px-6 py-4">
+              <?= $data->kelas_terisi . ' / ' . $data->kapasitas ?>
             </td>
             <td class="px-6 py-4">
               <?= is_null($data->nama_guru) ? '~' : str_replace('.', ' ', ucfirst($data->nama_guru)) ?>

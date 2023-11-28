@@ -8,25 +8,21 @@ try {
     );
   }
 
-  if (isset($_POST['mapel'])) {
-    $criteria = Helper::tertinggi($_POST);
+  $query = "SELECT s.nama_lengkap , s.nis, k.nama AS nama_kelas, k.id AS id_kelas, AVG(n.nilai_akhir) AS total 
+              FROM siswas s 
+              JOIN kelas k ON k.id=s.id_kelas
+              JOIN nilai n ON n.nis_siswa=s.nis 
+              GROUP BY s.nama_lengkap, k.nama 
+              ORDER BY total DESC";
+
+
+  if (isset($_POST['limit']) && $_POST['limit'] != 'x') {
+    $limit = $_POST['limit'];
+    $query .= " LIMIT $limit";
   }
-  $tertinggi  = $criteria['criteria'] ?? null;
 
-  $queryAll = "SELECT s.nis, s.nama_lengkap, k.nama AS kelas, m.nama_mapel, n.uts AS  max_uts, n.uas AS max_uas, ((n.uas + n.uts)/2) AS max_nilai_akhir 
-              FROM nilai n
-              JOIN siswas s ON n.nis_siswa = s.nis
-              JOIN mapel m ON n.kd_mapel = m.kode_mapel
-              JOIN kelas k ON s.id_kelas = k.id
-              $tertinggi
-              GROUP BY s.nis,s.nama_lengkap,m.nama_mapel
-              ORDER BY max_nilai_akhir DESC";
-
-  // var_dump($queryAll);
-  // die;
-
-  $datas = $connection->query($queryAll);
-  $byk = (mysqli_num_rows($datas) > 0) ? 'Menampilkan ' . mysqli_num_rows($datas) . ' nilai' : 'Tidak ada data';
+  $datas = $connection->query($query);
+  $byk = (mysqli_num_rows($datas) > 0) ? 'Menampilkan ' . mysqli_num_rows($datas) . ' data' : 'Tidak ada data';
 
   if (!$datas) {
     throw new Exception("Error to get data");
@@ -42,8 +38,8 @@ try {
 <section class="container -mt-6 mx-auto bg-white dark:bg-gray-900 mb-14 relative z-10">
   <div class="flex-row items-center justify-between p-4 space-y-3 rounded-ss-lg dark:bg-gray-800 sm:flex sm:space-y-0 sm:space-x-4 shadow-2xl w-full">
     <div>
-      <h4 class="mr-3 text-2xl font-semibold dark:text-white font-heading leading-tight">Semua nilai tertinggi</h4>
-      <p class="mt-1 text-sm font-normal font-subHeading text-gray-500 dark:text-gray-400"><?= $byk ?? "Silahkan <span class=\"underline hover:no-underline cursor-pointer\" onclick=\"window.location.href = '<?= HOME ?>?v=nilai&m=tertinggi'\">Refresh</span>" ?></p>
+      <h4 class="mr-3 text-2xl font-semibold dark:text-white font-heading leading-tight">Semua rank siswa</h4>
+      <p class="mt-1 text-sm font-normal font-subHeading text-gray-500 dark:text-gray-400"><?= $byk ?? "Silahkan <span class=\"underline hover:no-underline cursor-pointer\" onclick=\"window.location.href = 'https://ev.final.test/?v=nilai&m=rank'\">Refresh</span>" ?></p>
     </div>
     <div class="flex items-center justify-between pb-4">
 
@@ -58,38 +54,21 @@ try {
 
     <!-- Dropdown filter maoel -->
     <div id="dropFilter" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-72 dark:bg-gray-700 dark:divide-gray-600">
-      <form action="<?= HOME ?>?v=nilai&m=tertinggi" method="post">
+      <form action="<?= HOME ?>?v=nilai&m=rank" method="post">
         <ul class="p-3 space-y-3 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownToggleButton">
           <li>
-            <label for="mapel" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Mata pelajaran</label>
-            <select id="mapel" name="mapel" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-              <option value="x">Mapel...</option>
+            <label for="limit" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Limit Row</label>
+            <select id="limit" name="limit" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+              <option value="x">Limit...</option>
               <?php
-              $datasMapel = Helper::get('mapel', ['kolom' => ['nama_mapel', 'kode_mapel']]);
+              $limit = [1, 3, 5, 10, 15, 20];
 
-              foreach ($datasMapel as $data) :
-                if ($criteria['selected']['mapel'] === $data['kode_mapel']) :
+              foreach ($limit as $index) :
+                if ($limitless === $index) :
               ?>
-                  <option selected value="<?= $data['kode_mapel'] ?>"><?= ucfirst($data['nama_mapel']) ?> <small class="dark:text-gray-400">(<?= $data['kode_mapel'] ?></small>)</option>
+                  <option selected value="<?= $index ?>">Top <?= $index ?></option>
                 <?php else : ?>
-                  <option value="<?= $data['kode_mapel'] ?>"><?= ucfirst($data['nama_mapel']) ?> <small class="dark:text-gray-400">(<?= $data['kode_mapel'] ?></small>)</option>
-                <?php endif; ?>
-              <?php endforeach; ?>
-            </select>
-          </li>
-          <li>
-            <label for="kelas" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Kelas</label>
-            <select id="kelas" name="kelas" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-              <option value="x">Kelas...</option>
-              <?php
-              $datasMapel = Helper::get('kelas', ['kolom' => ['nama', 'id']]);
-
-              foreach ($datasMapel as $data) :
-                if ($criteria['selected']['kelas'] === $data['id']) :
-              ?>
-                  <option selected value="<?= $data['id'] ?>"><?= ucfirst($data['nama']) ?> <small class="dark:text-gray-400">(<?= $data['id'] ?>)</small></option>
-                <?php else : ?>
-                  <option value="<?= $data['id'] ?>"><?= ucfirst($data['nama']) ?> <small class="dark:text-gray-400">(<?= $data['id'] ?>)</small></option>
+                  <option value="<?= $index ?>">Top <?= $index ?></option>
                 <?php endif; ?>
               <?php endforeach; ?>
             </select>
@@ -119,8 +98,8 @@ try {
           <th scope="col" class="px-6 py-3">
             kelas
           </th>
-          <th scope="col" class="px-6 py-3">
-            mata pelajaran
+          <th scope="col" class="px-6 py-3 w-16">
+            ID kelas
           </th>
           <th scope="col" class="px-6 py-3 w-40 text-center">
             total nilai
@@ -142,13 +121,13 @@ try {
                 <?= Helper::username($data->nama_lengkap) ?>
               </td>
               <td class="px-6 py-4">
-                <a class="underline underline-offset-2 hover:decoration-2 decoration-gray-500" href="?v=siswa&kelas=<?= is_null($data->kelas) ? 'all' : str_replace(' ', '_', $data->kelas) ?>"><?= $data->kelas ?? null ?></a>
+                <a class="underline underline-offset-2 hover:decoration-2 decoration-gray-500" href="?v=siswa&kelas=<?= is_null($data->nama_kelas) ? 'all' : str_replace(' ', '_', $data->nama_kelas) ?>"><?= $data->nama_kelas ?? null ?></a>
               </td>
               <td class="px-6 py-4">
-                <?= $data->nama_mapel; ?>
+                <?= $data->id_kelas; ?>
               </td>
               <td class="px-6 py-4 text-center">
-                <?= number_format($data->max_nilai_akhir) ?? '-'; ?>
+                <?= is_null($data->total) ?  '-' : number_format($data->total, 2); ?>
               </td>
             </tr>
           <?php $i++;

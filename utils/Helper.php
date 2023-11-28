@@ -47,15 +47,16 @@ class Helper
       '99762217',
       '93191295'
     ];
+    $user = Faker\Factory::create('ja_JP');
+    $in = Faker\Factory::create('id_ID');
     for ($i = 0; $i < $count; $i++) {
-      $user = Faker\Factory::create('ja_JP');
       $datas = (object)[
         'nis' => $user->randomNumber(8, true),
         'id_kelas' => $user->randomElement($kelasId),
         'nama' => $user->userName(),
         'tanggal' => $user->date('Y-m-d'),
         'jk' => $user->randomElement(['l', 'p']),
-        'alamat' => $user->address(),
+        'alamat' => $in->address(),
         'tel' => $user->phoneNumber(),
         'agama' => $user->randomElement($agama),
         'jurusan' => $user->randomElement($jurusan),
@@ -195,7 +196,7 @@ class Helper
     $query .= " FROM $table";
 
     if (isset($options['order']) && in_array(strtolower($options['order']), ['asc', 'desc'])) {
-        $query .= " ORDER BY $table." . $options['kolom'] . " " . strtoupper($options['order']);
+      $query .= " ORDER BY $table." . $options['kolom'] . " " . strtoupper($options['order']);
     }
 
     if (isset($options['operator']) && isset($options['kolom'])) {
@@ -246,6 +247,31 @@ class Helper
       return 'D-';
     } else {
       return 'F';
+    }
+  }
+
+  public static function tertinggi($search): array
+  {
+    $criteria = '';
+    $isFilter = false;
+    $selected = [];
+
+    if (isset($search['kelas']) && $search['kelas'] != 'x') {
+      $filKelas = $search['kelas'];
+      $criteria .= " s.id_kelas='$filKelas'";
+      $selected['kelas'] = $filKelas;
+      $isFilter = true;
+    }
+
+    if (isset($search['mapel']) && $search['mapel'] != 'x') {
+      $filMapel = $search['mapel'];
+      $criteria .= ($isFilter ? " AND " : "") . "n.kd_mapel='$filMapel'";
+      $selected['mapel'] = $filMapel;
+      $isFilter = true;
+    }
+
+    if ($isFilter) {
+      return ['criteria' => $criteria = " WHERE $criteria", 'selected' => $selected];
     }
   }
 

@@ -38,23 +38,28 @@
             </svg></button>
         </li>
         <li>
-          <div id="animTop" class="z-50 mt-1 hidden w-full border-y border-gray-200 bg-gray-50 shadow-sm dark:border-gray-600 dark:bg-gray-800 max-md:!inset-auto max-md:!transform-none md:w-auto md:bg-white md:shadow-xl">
-            <ul class="mx-auto grid gap-1 px-4 py-5 text-gray-900 dark:text-white sm:grid-cols-2 md:max-w-screen-2xl md:px-6">
+          <div id="animTop" class="z-50 mt-1 hidden w-full border-y border-gray-200 bg-gray-50 shadow-sm dark:border-transparent dark:bg-gray-800 max-md:!inset-auto max-md:!transform-none md:w-auto md:bg-white md:shadow-2xl">
+            <ul class="mx-auto grid gap-1 px-0.5 py-1 text-gray-900 dark:text-white sm:grid-cols-2 md:max-w-screen-2xl md:p-2">
               <li>
-                <a href="<?= HOME ?>?v=raport" class="block py-2 pl-3 pr-4 text-gray-900 bg-gray-100 hover:underline hover:underline-offset-2 rounded md:bg-transparent dark:hover:decoration-sky-600 hover:text-blue-700 md:p-0 dark:text-white">
+                <a href="<?= HOME ?>?v=raport" class="block py-2 pl-3 pr-4 text-gray-900 dark:bg-gray-900 bg-gray-100 dark:hover:bg-gray-950 hover:underline hover:underline-offset-2 rounded md:bg-transparent dark:hover:decoration-sky-600 hover:text-blue-700 md:p-2.5 dark:text-white">
                   <div class="font-semibold text-white">Raport</div>
                 </a>
               </li>
               <li>
-                <a href="<?= HOME ?>?v=nilai&m=tertinggi" class="block py-2 pl-3 pr-4 text-gray-900 bg-gray-100 hover:underline hover:underline-offset-2 rounded md:bg-transparent dark:hover:decoration-sky-600 hover:text-blue-700 md:p-0 dark:text-white">
+                <a href="<?= HOME ?>?v=nilai&m=tertinggi" class="block py-2 pl-3 pr-4 text-gray-900 dark:bg-gray-900 bg-gray-100 dark:hover:bg-gray-950 hover:underline hover:underline-offset-2 rounded md:bg-transparent dark:hover:decoration-sky-600 hover:text-blue-700 md:p-2.5 dark:text-white">
                   <div class="font-semibold text-white">Nilai Tertinggi</div>
+                </a>
+              </li>
+              <li>
+                <a href="<?= HOME ?>?v=nilai&m=rank" class="block py-2 pl-3 pr-4 text-gray-900 dark:bg-gray-900 bg-gray-100 dark:hover:bg-gray-950 hover:underline hover:underline-offset-2 rounded md:bg-transparent dark:hover:decoration-sky-600 hover:text-blue-700 md:p-2.5 dark:text-white">
+                  <div class="font-semibold text-white">Rangking</div>
                 </a>
               </li>
             </ul>
           </div>
         </li>
         <?php
-        if ($_REQUEST && $_REQUEST['v'] != 'raport') : ?>
+        if ($_REQUEST && $_REQUEST['v'] != 'raport' && $_REQUEST['v'] != 'nilai') : ?>
           <li>
             <div class="inline-flex">
               <button type="button" data-dropdown-toggle="language-dropdown-menu" class="inline-flex items-center font-medium space-x-3 px-4 py-3 border border-gray-500 rounded-lg cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white">

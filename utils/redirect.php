@@ -50,6 +50,13 @@ function redirect($url)
         'page' => 'component/nilai/nilaiTertinggi.php'
       ];
     }
+    if (isset($_GET['m']) && $_GET['m'] == 'rank') {
+      return [
+        't' => 'Semua nilai | Rank',
+        'head' => 'Ranking Murid',
+        'page' => 'component/nilai/rank.php'
+      ];
+    }
     return [
       't' => 'Semua Nilai',
       'head' => '(⊙_⊙;)',
